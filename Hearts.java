@@ -13,6 +13,7 @@ public class Hearts {
 
 		// pass in four players and deck to game
 		Game round = new Game(thing, p1, p2, p3, p4);
+		round.playGame();
 
 	}
 }

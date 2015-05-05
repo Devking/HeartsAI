@@ -3,9 +3,10 @@ import java.util.*;
 
 abstract class Player {
 	String name;
+	int points;
 	ArrayList<Card> hand = new ArrayList<Card>();
 
-	Player (String id) { name = id; }
+	Player (String id) { name = id; points = 0;}
 
 	// for drawing cards from the deck
 	void addToHand (Card newCard) { hand.add(newCard); }
@@ -26,6 +27,8 @@ abstract class Player {
 
 	void clearHand () { hand.clear(); }
 
+	void clearPlayer() { clearHand(); points = 0; }
+
 	// used for the beginning of the game, to see who goes first
 	boolean hasTwoOfClubs () { 
 		if (hand.size() == 0) return false;
@@ -34,4 +37,8 @@ abstract class Player {
 	}
 
 	String getName () { return name; }
+
+	// given any sort of player, make a decision to play a card
+	abstract Card performAction ();
+
 }

@@ -10,6 +10,6 @@
 
 ### Version History:
 
-0.0.1 -- just setting all of the infrastructure up and testing some java things
-0.0.2 -- implemented abstract player as well as basic human player skeleton
-0.0.3 -- 
+0.0.1 -- just setting all of the infrastructure up and testing some java things  
+0.0.2 -- implemented abstract player as well as basic human player skeleton  
+0.0.3 -- begun implementation for game playouts  
