@@ -5,7 +5,7 @@ class Card {
 
 	Suit getSuit() { return suit; }
 	Value getValue() { return value; }
-
+	
 	Suit suit;
 	Value value;
 

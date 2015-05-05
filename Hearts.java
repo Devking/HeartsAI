@@ -10,5 +10,10 @@ public class Hearts {
 
 		
 		thing.printNumber();
+		thing.drawTop();
+		thing.printNumber();
+		thing.drawTop();
+		thing.printNumber();
+		thing.drawTop();
 	}
 }
