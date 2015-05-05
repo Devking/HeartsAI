@@ -9,5 +9,14 @@ public class Hearts {
 		System.out.println("Welcome to Hearts version 0.0.1.");
 		Deck thing = new Deck();
 		thing.printNumber();
+
+
+		Value one = Value.ONE;
+		Value two = Value.TWO;
+
+		// will be positive if the caller is larger than the parameter
+		if (one.compareTo(two) < 0) {
+			System.out.println("things work!");
+		}
 	}
 }
