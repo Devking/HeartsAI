@@ -7,6 +7,7 @@
 - Deck class (for the "deck" to deal hands)  
 - Hand class (for each of the hands)  
 - Game class (plays one game)  
+Testing 123 AWong
 
 ### Version History:
 
