@@ -6,12 +6,8 @@ public class Deck {
 	// so we do not generate duplicate decks
 	boolean initCounter;
 
-
+	// these are all of the cards currently in the deck
 	ArrayList<Card> allCards = new ArrayList<Card>();
-
-
-	// this currently is just being used for debugging to make sure that the enums work
-	Card topOfDeck;
 
 	// constructor for a deck: initialize the 52 cards and shuffle the deck
 	Deck () { initCounter = true; initDeck(); shuffleDeck(); }
@@ -29,6 +25,7 @@ public class Deck {
 		}
 	}
 	
+	// this is used to shuffle the deck (reorder the elements in the arraylist)
 	void shuffleDeck() {
 		long seed = System.nanoTime();
 		Collections.shuffle(allCards, new Random(seed));
@@ -41,6 +38,16 @@ public class Deck {
 		for(Card car: allCards) { System.out.println(car.getValue() + " of " + car.getSuit()); }
 	}
 
-	Card drawTop() { return allCards.remove(allCards.size() - 1); }
+	// remove and return the top card, to place it in a hand (used in dealing, which is in Game)
+	Card drawTop() { 
+		if (allCards.size() != 0) 
+			return allCards.remove(allCards.size() - 1); 
+		else
+			System.out.println("Error! The Deck is empty; cannot draw from it!");
+	}
+
+	// return a card to the deck
+	// be careful with pointer issues
+	void restockDeck(Card returned) { allCards.add(returned); }
 
 }
