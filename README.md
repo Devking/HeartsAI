@@ -8,6 +8,11 @@
 - Hand class (for each of the hands)  
 - Game class (plays one game)  
 
+- Player abstract class (defines base functionality for any player)  
+- HumanPlayer class extends Player (performAction() allows human input)  
+
+- Hearts class (this is the main file that brings it all together)
+
 ### Version History:
 
 0.0.1 -- just setting all of the infrastructure up and testing some java things  
