@@ -6,7 +6,7 @@ class Card {
 	Suit getSuit() { return suit; }
 	Value getValue() { return value; }
 
-	void printCard() { System.out.println( getValue() + " of " + getSuit()); }
+	void printCard() { System.out.print( getValue() + " of " + getSuit()); }
 	
 	Suit suit;
 	Value value;

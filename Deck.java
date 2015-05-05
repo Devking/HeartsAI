@@ -1,3 +1,5 @@
+// dependencies are on Suit, Value, and Card classes
+
 import java.util.*;
 
 public class Deck {
@@ -30,12 +32,13 @@ public class Deck {
 		long seed = System.nanoTime();
 		Collections.shuffle(allCards, new Random(seed));
 		// this is for debugging
-		printDeck();
+		 //printDeck();
 	}
 
 	// for debugging: print out entire deck
 	void printDeck() {
-		for(Card car: allCards) { car.printCard(); }
+		for(Card car: allCards) { car.printCard(); System.out.print(" "); }
+		System.out.println("\nSize of Deck: " + allCards.size() + "\n");
 	}
 
 	// remove and return the top card, to place it in a hand (used in dealing, which is in Game)
@@ -50,5 +53,8 @@ public class Deck {
 	// return a card to the deck
 	// be careful with pointer issues
 	void restockDeck(Card returned) { allCards.add(returned); }
+
+	// check that we have all 52 unique cards
+	// checkDeck() {}
 
 }
