@@ -8,12 +8,5 @@ public class Hearts {
 		// pass in four players and deck to game
 		Game round = new Game();
 
-		
-		thing.printNumber();
-		thing.drawTop();
-		thing.printNumber();
-		thing.drawTop();
-		thing.printNumber();
-		thing.drawTop();
 	}
 }

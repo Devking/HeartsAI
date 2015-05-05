@@ -6,40 +6,41 @@ public class Deck {
 	// so we do not generate duplicate decks
 	boolean initCounter;
 
-	int numberOfCards;
+
 	ArrayList<Card> allCards = new ArrayList<Card>();
+
+
 	// this currently is just being used for debugging to make sure that the enums work
 	Card topOfDeck;
-	Deck () { initCounter = true; numberOfCards = 52; initDeck(); makeDeck(); }
-	//Deck () { initCounter = true; numberOfCards = 52; topOfDeck = new Card(Suit.HEARTS, Value.ACE); initDeck(); }
-	void printNumber() { 
-		System.out.println(topOfDeck.getValue() + " of " + topOfDeck.getSuit());  
-		}
-	
+
+	// constructor for a deck: initialize the 52 cards and shuffle the deck
+	Deck () { initCounter = true; initDeck(); shuffleDeck(); }
+
+	// generate deck for the first time; can only be used once; should never be called outside constructor
 	void initDeck () {
 		if (initCounter) {
 			System.out.println("The deck has been initialized.");
+			for (Suit sui: Suit.values()) {
+				for (Value val: Value.values()) {
+					allCards.add(new Card(sui, val));
+				}
+			}
 			initCounter = false;
-
 		}
 	}
 	
-	
-	void makeDeck() {
-		
-		for (Suit sui: Suit.values()) {
-			for (Value val: Value.values()) {
-				allCards.add(new Card(sui, val));
-			}
-		}
+	void shuffleDeck() {
 		long seed = System.nanoTime();
 		Collections.shuffle(allCards, new Random(seed));
-		for(Card car: allCards) {
-		    System.out.println(car.getValue() + " of " + car.getSuit()); 
-		}
-		topOfDeck = allCards.remove(allCards.size() - 1);
+		// this is for debugging
+		printDeck();
 	}
-	
+
+	// for debugging: print out entire deck
+	void printDeck() {
+		for(Card car: allCards) { System.out.println(car.getValue() + " of " + car.getSuit()); }
+	}
+
 	Card drawTop() { return allCards.remove(allCards.size() - 1); }
 
 }
