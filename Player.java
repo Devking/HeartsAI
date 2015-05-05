@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.*;
 
 abstract class Player {
 	String name;
@@ -19,6 +20,18 @@ abstract class Player {
 		System.out.println("\nSize of Hand: " + hand.size() + "\n");
 	}
 
+	void sortHand () {
+		Collections.sort(hand);
+	}
+
 	void clearHand () { hand.clear(); }
 
+	// used for the beginning of the game, to see who goes first
+	boolean hasTwoOfClubs () { 
+		if (hand.size() == 0) return false;
+		Card holder = new Card(Suit.CLUBS, Value.TWO);
+		return holder.equals(hand.get(0));
+	}
+
+	String getName () { return name; }
 }
