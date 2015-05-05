@@ -39,8 +39,7 @@ public class Deck {
 		}
 		topOfDeck = allCards.remove(allCards.size() - 1);
 	}
-	void drawTop() {
-		topOfDeck = allCards.remove(allCards.size() - 1);
-	}
+	
+	Card drawTop() { return allCards.remove(allCards.size() - 1); }
 
 }
