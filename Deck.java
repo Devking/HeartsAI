@@ -1,5 +1,9 @@
 class Deck {
 	int numberOfCards;
-	Deck () { numberOfCards = 52; }
-	void printNumber() { System.out.println(numberOfCards); }
+	//ArrayList<Card> allCards;
+
+	// this currently is just being used for debugging to make sure that the enums work
+	Card topOfDeck;
+	Deck () { numberOfCards = 52; topOfDeck = new Card(); }
+	void printNumber() { System.out.println(topOfDeck.getValue()); }
 }
