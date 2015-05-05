@@ -17,6 +17,7 @@ public class Deck {
 		if (initCounter) {
 			System.out.println("The deck has been initialized.");
 			initCounter = false;
+
 		}
 	}
 	
@@ -32,23 +33,5 @@ public class Deck {
 		    System.out.println(car.getValue() + " of " + car.getSuit()); 
 		}
 	}
-	//ArrayList<String> al = new ArrayList<String>();
-	//System.out.println("Initial size of al: " + al.size());
-    //al.add("C");
-    //al.add("A");
-    //al.add("E");
-    //al.add("B");
-    //al.add("D");
-    //al.add("F");
-    //al.add(1, "A2");
-    //System.out.println("Size of al after additions: " + al.size());
-
-    // display the array list
-    //System.out.println("Contents of al: " + al);
-    // Remove elements from the array list
-    //al.remove("F");
-    //al.remove(2);
-    //System.out.println("Size of al after deletions: " + al.size());
-    //System.out.println("Contents of al: " + al);
 
 }
