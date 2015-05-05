@@ -35,7 +35,7 @@ public class Deck {
 
 	// for debugging: print out entire deck
 	void printDeck() {
-		for(Card car: allCards) { System.out.println(car.getValue() + " of " + car.getSuit()); }
+		for(Card car: allCards) { car.printCard(); }
 	}
 
 	// remove and return the top card, to place it in a hand (used in dealing, which is in Game)
@@ -44,6 +44,7 @@ public class Deck {
 			return allCards.remove(allCards.size() - 1); 
 		else
 			System.out.println("Error! The Deck is empty; cannot draw from it!");
+		return null;
 	}
 
 	// return a card to the deck
