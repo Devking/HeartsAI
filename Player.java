@@ -42,9 +42,12 @@ abstract class Player {
 	void printHand () {
 		System.out.print("\n" + name + "`s hand ("+hand.size()+" card");
 		if (hand.size() > 1) System.out.print("s");
-		System.out.println("):");
+		System.out.print("):\n|");
+		for (int i = 0; i < hand.size(); i++) { System.out.format("%2d|", i); }
+		System.out.print("\n|");
 		for (int i = 0; i < hand.size(); i++) { 
-			System.out.print("(" + i + ") " + hand.get(i).printCard() + " | "); 
+			// we can either use printCard() or printCardShort()
+			System.out.print(hand.get(i).printCardShort() + "|"); 
 		}
 		System.out.println("");
 	}

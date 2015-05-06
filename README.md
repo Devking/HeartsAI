@@ -22,11 +22,11 @@
 0.0.6 &mdash; game keeps track of the scores of each player now!  
 0.0.7 &mdash; game keeps track of scores between games; games do initialization properly now  
 0.0.8 &mdash; HumanPlayer can now select which card to play, with Exception Handling!  
+0.0.9 &mdash; Added card "shorthand" display using unicode characters
 
 ### Things To Do
 
 - Make sure the player card selection is valid (within Game.java)  
-- Displaying cards as "4H" rather than "FOUR OF HEARTS"  
 - Computation for who the next firstPlayer is (within Game.java)  
 
 ## Version Goals
