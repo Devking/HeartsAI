@@ -91,6 +91,8 @@ class Game {
 	}
 
 	// Return a bool based on whether the played card was valid or not
+	// Hearts can only be led if hearts has been broken
+	// Currently: Queen of Spades does not break hearts
 	boolean checkRound (Card playedCard, int index) {
 
 		// first, do the two of clubs check
@@ -196,6 +198,23 @@ class Game {
 		System.out.println();
 	}
 
+	// end-game functionality for shooting the moon
+	void shotTheMoon () {
+		int index = -1;
+		for (int i = 0; i < playerScores.size(); i++) {
+			if (playerScores.get(i) == 26) {
+				System.out.println(playerOrder.get(i).getName() + " shot the moon!");
+				index = i;
+			}
+		}
+		if (index > -1) {
+			for (int i = 0; i < playerOrder.size(); i++) {
+				if (i != index) playerOrder.get(i).addPoints(26);
+				else playerOrder.get(i).addPoints(-26);
+			}
+		}
+	}
+
 	// Call this whenever you want to start a completely new game and play through it
 	void playNewGame() {
 		// We must call this to shuffle the deck and deal cards to all the players
@@ -288,7 +307,7 @@ class Game {
 		}
 
 		// add function to deal with someone who shot the moon this game
-		// shotTheMoon();
+		shotTheMoon();
 		System.out.println("------------------------------------------");
 		System.out.println("Game Summary:");
 		System.out.println("------------------------------------------\n");
