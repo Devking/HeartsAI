@@ -1,6 +1,6 @@
 public class Hearts {
 	public static void main(String[] args) {
-		System.out.println("Welcome to Hearts version 0.0.5.");
+		System.out.println("Welcome to Hearts version 0.0.7.");
 		System.out.println("(First playable version will be 1.0.0.)\n");
 
 		// separate deck and four players from game

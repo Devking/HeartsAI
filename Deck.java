@@ -1,4 +1,4 @@
-// dependencies are on Suit, Value, and Card classes
+// dependencies are on Suit, Value, and Card files
 
 import java.util.*;
 
