@@ -15,45 +15,14 @@ class Game {
 	ArrayList<Card> currentRound;
 
 	Game (Deck deck, Player p1, Player p2, Player p3, Player p4) {
-	
-		deck.shuffleDeck();
 		playerOrder = new ArrayList<Player>();
 		playerOrder.add(p1);
 		playerOrder.add(p2);
 		playerOrder.add(p3);
 		playerOrder.add(p4);
-
-		// deck.printDeck();
-		// deck.checkDeck();
-
-		for (Player p : playerOrder) { p.clearHand(); }
-		// pass out all cards to the 4 players
-		for (int i = 0; i < 13; i++) {
-			for (Player p : playerOrder) { p.addToHand ( deck.drawTop() ); }
-		}
-		// sort all hands
-		for (Player p : playerOrder) { p.sortHand(); }
-
-		// for debugging:
-		// for (Player p : playerOrder) { p.printHand(); }
-
-		// be careful with copy/move semantics
 		cardsPlayed = deck;
-		//cardsPlayed.printDeck();
-
-		// pick first player (the one whose first card is two of clubs)
-		// and add everyone into the playing queue
-		for (int i = 0; i < 4; i++) {
-			if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; }
-		}
-
-		// debug message
-		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
-		currentRound = new ArrayList<Card>();
-
-		// passing cards at start of game -- for now, no passing
-
-
+		// note that this WILL NOT shuffle the deck or deal the cards
+		// we ONLY do that upon playing a new game
 	}
 
 	// print the cards that were played so far this round
@@ -78,6 +47,40 @@ class Game {
 		return (firstPlayer+1)%playerOrder.size();
 	}
 
+	// call this every time a new game is played (or first game is initialized)
+	// this will shuffle the deck (stored in cardsPlayed) and clear player hands
+	void initNewGame () {
+		cardsPlayed.shuffleDeck();
+		// cardsPlayed.printDeck();
+		// cardsPlayed.checkDeck(); // we need a way to check that all 52 cards are here correctly
+
+		for (Player p : playerOrder) { p.clearHand(); }
+		// pass out all cards to the 4 players
+		for (int i = 0; i < 13; i++) {
+			for (Player p : playerOrder) { p.addToHand ( cardsPlayed.drawTop() ); }
+		}
+		// sort all hands
+		for (Player p : playerOrder) { p.sortHand(); }
+
+		// for debugging:
+		// for (Player p : playerOrder) { p.printHand(); }
+
+		// be careful with copy/move semantics
+		//cardsPlayed.printDeck();
+
+		// pick first player (the one whose first card is two of clubs)
+		// and add everyone into the playing queue
+		for (int i = 0; i < 4; i++) {
+			if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; }
+		}
+
+		// debug message
+		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
+		currentRound = new ArrayList<Card>();
+
+		// passing cards at start of game -- for now, no passing
+	}
+
 	// go through the cards from the currentRound and calculate their point values
 	// then give those points to the user with index "loser"
 	void givePoints(int loser) {
@@ -96,9 +99,10 @@ class Game {
 		System.out.println();
 	}
 
-	void playGame() {
+	void playNewGame() {
 
-		// we need to make sure that this is only called ONCE, after the game has been initialized
+		// we must call this to shuffle the deck and deal cards to all the players
+		initNewGame();
 
 		// for all 13 rounds
 		for (int i = 1; i < 14; i++) {

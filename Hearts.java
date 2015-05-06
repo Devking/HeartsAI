@@ -16,7 +16,8 @@ public class Hearts {
 		// thing.printDeck();
 
 		// Play Multiple Games
-		int numberOfGames = 1;
+		int numberOfGames = 10;
+		Game round = new Game(thing, p1, p2, p3, p4);
 		for (int i = 1; i <= numberOfGames; i++) {
 			System.out.println("\n--------------------------------------------");
 			System.out.println("--------------------------------------------");
@@ -25,8 +26,7 @@ public class Hearts {
 			System.out.println("--------------------------------------------");
 			System.out.println("--------------------------------------------");
 			System.out.println("--------------------------------------------\n");
-			Game round = new Game(thing, p1, p2, p3, p4);
-			round.playGame();
+			round.playNewGame();
 		}
 
 	}
