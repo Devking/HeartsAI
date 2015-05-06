@@ -9,7 +9,7 @@
 - Game class (plays one game)
 - Player abstract class (defines base functionality for any player)  
 
-- HumanPlayer class extends Player (performAction() allows human input)
+- HumanPlayer class extends Player (`performAction()` allows human input)
 
 - Hearts class (this is the main file that brings it all together)
 

@@ -37,7 +37,7 @@ public class Deck {
 
 	// for debugging: print out entire deck
 	void printDeck() {
-		for(Card car: allCards) { car.printCard(); System.out.print(" "); }
+		for(Card car: allCards) { System.out.print(car.printCard() + " "); }
 		System.out.println("\nSize of Deck: " + allCards.size() + "\n");
 	}
 

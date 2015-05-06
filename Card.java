@@ -6,7 +6,7 @@ class Card implements Comparable<Card> {
 	Suit getSuit() { return suit; }
 	Value getValue() { return value; }
 
-	void printCard() { System.out.print( getValue() + " of " + getSuit()); }
+	String printCard() { return getValue() + " of " + getSuit(); }
 	
 	Suit suit;
 	Value value;

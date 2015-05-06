@@ -15,8 +15,7 @@ abstract class Player {
 	void printHand () {
 		System.out.println(name + "`s hand:");
 		for (Card c : hand) {
-			c.printCard();
-			System.out.print(" | ");
+			System.out.print(c.printCard() + " | ");
 		}
 		System.out.println("\nSize of Hand: " + hand.size() + "\n");
 	}

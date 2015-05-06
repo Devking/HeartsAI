@@ -67,8 +67,17 @@ class Game {
 				
 				playerOrder.get(index).printHand();
 
+				Card played = playerOrder.get(index).performAction();
+				System.out.println(playerOrder.get(j).getName() + " played " + played.printCard() + ".");
+
 				// now find a way to do player action, for both humans and AI
-				oldDeck.restockDeck( playerOrder.get(index).performAction() );
+				oldDeck.restockDeck( played );
+
+				// flush the screen (this is just for convenience for human players)
+				final String ANSI_CLS = "\u001b[2J";
+        		final String ANSI_HOME = "\u001b[H";
+        		System.out.print(ANSI_CLS + ANSI_HOME);
+        		System.out.flush();
 			}
 
 			// update who is firstPlayer
