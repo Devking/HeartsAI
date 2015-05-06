@@ -114,7 +114,7 @@ class Game {
 				// each player will already know what cards they have
 				Card playedCard = playerOrder.get(index).performAction();
 
-				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".\n");
+				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".");
 
 				// we *could* printHand() here, but it's better to have each player do that
 				// based on whether or not that player specifically needs to print hand or not
@@ -144,7 +144,7 @@ class Game {
 			firstPlayer = findTaker(firstPlayer);
 			int points = calculatePoints();
 			playerOrder.get(firstPlayer).addPoints(points);
-			System.out.println(playerOrder.get(firstPlayer).getName() + " took " + points + " points this round.\n");
+			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " took " + points + " points this round.\n");
 			printPoints();
 
 		}

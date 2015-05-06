@@ -1,6 +1,6 @@
 # Hearts
 
-### Class Structure
+## Class Structure
 - Value enum  
 - Suit enum  
 - Card class (for each individual card)  
@@ -13,7 +13,7 @@
 
 - Hearts class (this is the main file that brings it all together)  
 
-### Version History
+## Version History
 
 0.0.1 &mdash; just setting all of the infrastructure up and testing some java things  
 0.0.2 &mdash; implemented abstract player as well as basic human player skeleton  
@@ -23,7 +23,14 @@
 0.0.6 &mdash; game keeps track of the scores of each player now!  
 0.0.7 &mdash; game keeps track of scores between games; games do initialization properly now  
 
-### Version Goals
+### Things To Do
+
+- Rules for playing cards each round  
+- Functionality for human players to pick cards per round  
+- Displaying cards as "4H" rather than "FOUR OF HEARTS"  
+- Computation for who the next firstPlayer is  
+
+## Version Goals
 
 0.1.0 &mdash; full game implemented (with limited functionality)  
 1.0.0 &mdash; first full working game version (with all human players)  
