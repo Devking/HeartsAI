@@ -9,6 +9,7 @@ class Game {
 	ArrayList<Card> currentRound;   // cards currently played on the table
 	boolean twoClubsPlayed; 		// a flag to check if the two of clubs has been played or not
 	boolean hasHeartsBroken;		// a flag to check if hearts has been broken
+	ArrayList<Integer> playerScores; 	// keep track of the player scores within this game
 
 	// Every game must have four players and one deck!
 	// Note: This WILL NOT shuffle the deck or deal the cards here
@@ -24,6 +25,7 @@ class Game {
 		currentRound = new ArrayList<Card>();
 		twoClubsPlayed = false;
 		hasHeartsBroken = false;
+		playerScores = new ArrayList<Integer>();
 	}
 
 	// Call this every time a new game is played to shuffle the deck and clear player hands
@@ -45,6 +47,12 @@ class Game {
 		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
 		// just to be safe, clear the arraylist of cards on the table
 		currentRound.clear();
+		// clear scores for this game
+		playerScores.clear();
+		playerScores.add(0);
+		playerScores.add(0);
+		playerScores.add(0);
+		playerScores.add(0);
 		// passing cards at start of game -- for now, no passing, but we would add it here
 		// passCards();
 
@@ -159,8 +167,8 @@ class Game {
 	void printPoints() {
 		System.out.println("Points received this game:");
 		System.out.println("--------------------------");
-		for (Player p : playerOrder) {
-			System.out.println(p.getName() + " has " + p.getPoints() + " points.");
+		for (int i = 0; i < playerOrder.size(); i++) {
+			System.out.println(playerOrder.get(i).getName() + " has " + playerScores.get(i) + " points.");
 		}
 		System.out.println();
 	}
@@ -245,6 +253,7 @@ class Game {
 			// 3. addPoints() will add those points to the correct player
 			firstPlayer = findTaker(firstPlayer);
 			int points = calculatePoints();
+			playerScores.set(firstPlayer,playerScores.get(firstPlayer)+points);
 			playerOrder.get(firstPlayer).addPoints(points);
 			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " played the highest card "
 				+ "and took " + points + " points this round.\n");
