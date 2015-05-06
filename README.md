@@ -24,18 +24,18 @@
 0.0.8 &mdash; HumanPlayer can now select which card to play, with Exception Handling!  
 0.0.9 &mdash; Added card "shorthand" display using unicode characters (and reordered suits)  
 0.0.10 &mdash; Game now checks if the played card by the Player is valid! (for ALL cases)  
+0.0.11 &mdash; Game now checks who the "winner" of each round is!  
+0.1.0 &mdash; First full game implemented! (With no state tracking functionality for AI)  
 
 ### Things To Do
 
-- Computation for who the next firstPlayer is (within Game.java)  
-- Finish state representations to be passed in to `performAction()`  
 - Get working low-play AI (plays lowest valid card option)  
+- Finish state representations to be passed in to `performAction()`  
 - Get working FSM AI  
 - Get working MCTS AI  
 
 ## Version Goals
 
-0.1.0 &mdash; full game implemented (with limited state functionality)  
 1.0.0 &mdash; first full working game version (with all human players)  
 1.1.0 &mdash; full working game with basic low-play AI  
 1.2.0 &mdash; full working game with basic FSM AI

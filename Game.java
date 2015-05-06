@@ -58,7 +58,7 @@ class Game {
 	// Print the cards that were played so far this round
 	// be sure to pass in the index of the first player to get the names right
 	void printRound(int firstPlayer) {
-		System.out.println("Cards played this round:");
+		System.out.println("\nCards played this round:");
 		if (currentRound.size() == 0) {
 			System.out.println("No cards have been played this round.");
 		}
@@ -66,7 +66,7 @@ class Game {
 			int index = (i+firstPlayer) % playerOrder.size();
 			System.out.println(playerOrder.get(index).getName() + " played " + currentRound.get(i).printCard() + ".");
 		}
-		System.out.println();
+		//System.out.println();
 	}
 
 	// Return a bool based on whether the played card was valid or not
@@ -116,7 +116,25 @@ class Game {
 	// Pass in the index of the current first player (to check who played what card)
 	// NOTE: This MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
 	int findTaker (int firstPlayer) {
-		return (firstPlayer+1)%playerOrder.size();
+		Suit firstSuit = currentRound.get(0).getSuit();
+		Value largestValue = currentRound.get(0).getValue();
+		int taker = firstPlayer;
+
+		// go through all 4 cards that were played this round
+		for (int i = 0; i < playerOrder.size(); i++) {
+			// keep track of the index of who played it
+			int index = (firstPlayer+i) % playerOrder.size();
+			// if this card is the same suit as the first card, proceed
+			if (currentRound.get(i).getSuit() == firstSuit) {
+				// if this card is the largest played of the right suit this round, this player takes the round
+				if (largestValue.compareTo(currentRound.get(i).getValue()) < 0) {
+					taker = index;
+					largestValue = currentRound.get(i).getValue();
+				}
+			}
+		}
+
+		return taker % playerOrder.size();
 	}
 
 	// Go through the cards from the currentRound and calculate their point values
@@ -152,7 +170,7 @@ class Game {
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
-				//printRound(firstPlayer); // for debugging: print the cards that were played this round
+				printRound(firstPlayer); // for debugging: print the cards that were played this round
 				if (j == 0) checkHeartsOnly(index);		// if this is the first player this round, check if only hearts
 				boolean validPlay = false;
 				Card playedCard = null;
@@ -182,15 +200,15 @@ class Game {
 				// this will take the card that is played and add it back to the deck
 				cardsPlayed.restockDeck( playedCard );
 				// flush the screen (this is just for convenience for human players)
-				/*
+				
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
         		System.out.print(ANSI_CLS + ANSI_HOME);
         		System.out.flush();
-        		*/
+        		
 			}
 
-			// printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
+			 printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
 
 			// 1. findTaker() will update who took the cards this round
 			// 2. calculatePoints() will calculate how many points this round consisted of
@@ -198,7 +216,8 @@ class Game {
 			firstPlayer = findTaker(firstPlayer);
 			int points = calculatePoints();
 			playerOrder.get(firstPlayer).addPoints(points);
-			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " took " + points + " points this round.\n");
+			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " played the highest card "
+				+ "and took " + points + " points this round.\n");
 			printPoints();
 
 		}
