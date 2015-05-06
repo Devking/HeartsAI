@@ -98,27 +98,21 @@ class Game {
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
-
-				// for debugging: print the cards that were played this round
-				//printRound(firstPlayer);
+				//printRound(firstPlayer); // for debugging: print the cards that were played this round
 
 				// ideally, we should pass in (a) cardsPlayed, (b) currentRound, (c) scores
 				// we should not be passing in the hands of other players (hidden information)
 				// each player will already know what cards they have
 				Card playedCard = playerOrder.get(index).performAction();
-
 				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".");
-
 				// we *could* printHand() here, but it's better to have each player do that
 				// based on whether or not that player specifically needs to print hand or not
 
-				// add the played card to the currentRound
+				// add the played card to the currentRound (put the card on the table for all to see)
 				// BE CAREFUL! We will be adding a direct pointer to the card here!
 				currentRound.add(playedCard);
-
 				// this will take the card that is played and add it back to the deck
 				cardsPlayed.restockDeck( playedCard );
-
 				// flush the screen (this is just for convenience for human players)
 				/*
 				final String ANSI_CLS = "\u001b[2J";
