@@ -46,6 +46,12 @@ class Game {
 		currentRound.clear();
 		// passing cards at start of game -- for now, no passing, but we would add it here
 		// passCards();
+
+		// flush the screen -- only for human players to debug
+		final String ANSI_CLS = "\u001b[2J";
+        final String ANSI_HOME = "\u001b[H";
+       	System.out.print(ANSI_CLS + ANSI_HOME);
+        System.out.flush();
 	}
 
 	// Given the index of the player, check if that player only has hearts left
@@ -200,7 +206,6 @@ class Game {
 				// this will take the card that is played and add it back to the deck
 				cardsPlayed.restockDeck( playedCard );
 				// flush the screen (this is just for convenience for human players)
-				
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
         		System.out.print(ANSI_CLS + ANSI_HOME);
