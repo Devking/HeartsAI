@@ -23,6 +23,7 @@ class LowPlayAI extends Player {
 		for (int i = 0; i < hand.size(); i++)
 			if (hand.get(i).getSuit() == firstSuit) return hand.remove(i);
 
+		// If no cards of that suit, then play the smallest card in the hand
 		return hand.remove(0);
 	}
 
