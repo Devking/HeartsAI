@@ -20,6 +20,7 @@
 0.0.3 &mdash; begun implementation for game playouts  
 0.0.4 &mdash; able to do multiple playouts of the game
 0.0.5 &mdash; able to keep track of cards played for each round
+0.0.6 &mdash; game keeps track of the scores of each player now!
 
 ### Version Goals
 

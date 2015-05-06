@@ -23,7 +23,7 @@ class Game {
 		playerOrder.add(p3);
 		playerOrder.add(p4);
 
-		//deck.printDeck();
+		// deck.printDeck();
 		// deck.checkDeck();
 
 		for (Player p : playerOrder) { p.clearHand(); }
@@ -66,6 +66,32 @@ class Game {
 		for (int i = 0; i < currentRound.size(); i++) {
 			int index = (i+firstPlayer) % playerOrder.size();
 			System.out.println(playerOrder.get(index).getName() + " played " + currentRound.get(i).printCard());
+		}
+		System.out.println();
+	}
+
+	// return the index of the next player who will play // the player who takes this round
+	// pass in the index of the current first player
+	// we will go through currentRound to check who "wins"
+	// NOTE: you MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
+	int findTaker (int firstPlayer) {
+		return (firstPlayer+1)%playerOrder.size();
+	}
+
+	// go through the cards from the currentRound and calculate their point values
+	// then give those points to the user with index "loser"
+	void givePoints(int loser) {
+		int points = 0;
+		for (Card c : currentRound) {
+			if (c.getSuit() == Suit.HEARTS) points++;
+			if (c.getValue() == Value.QUEEN && c.getSuit() == Suit.SPADES) points += 13;
+		}
+		playerOrder.get(loser).addPoints(points);
+	}
+
+	void printPoints() {
+		for (Player p : playerOrder) {
+			System.out.println(p.getName() + " has " + p.getPoints() + " points.");
 		}
 		System.out.println();
 	}
@@ -114,9 +140,12 @@ class Game {
 
 			printRound(firstPlayer);
 
-			// update who is firstPlayer
-			// right now, for debugging, we move the firstPlayer over by 1 every round
-			firstPlayer = (firstPlayer+1) % playerOrder.size();
+			// we will use this function to find the player who wins this round
+			// we will assign the "firstPlayer" to this index, so they play first next
+			// they also take the points associated with this round
+			firstPlayer = findTaker(firstPlayer);
+			givePoints(firstPlayer);
+			printPoints();
 
 		}
 

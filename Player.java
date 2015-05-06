@@ -40,4 +40,7 @@ abstract class Player {
 	// given any sort of player, make a decision to play a card
 	abstract Card performAction ();
 
+	void addPoints (int pnts) { points += pnts; }
+	int getPoints () { return points; }
+
 }
