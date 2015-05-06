@@ -21,7 +21,30 @@ class Game {
 		currentRound = new ArrayList<Card>();
 	}
 
-	// print the cards that were played so far this round
+	// Call this every time a new game is played to shuffle the deck and clear player hands
+	void initNewGame () {
+		cardsPlayed.shuffleDeck();
+		// cardsPlayed.printDeck(); // debugging to make sure the deck is correct
+		// cardsPlayed.checkDeck(); // we need a way to check that all 52 cards are here correctly
+		// clear the hands of all the players (to make sure they're not holding anything already!)
+		for (Player p : playerOrder) { p.clearHand(); }
+		// pass out all cards to the 4 players
+		for (int i = 0; i < 13; i++) { for (Player p : playerOrder) { p.addToHand ( cardsPlayed.drawTop() ); } }
+		// sort all hands
+		for (Player p : playerOrder) { p.sortHand(); }
+		// for (Player p : playerOrder) { p.printHand(); }		// for debugging to check all the hands are valid
+		// cardsPlayed.printDeck();								// for debugging to check all cards have been dealt
+		// pick first player (the one who holds the two of clubs)
+		for (int i = 0; i < 4; i++) { if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; } }
+		// print message to say who plays first
+		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
+		// just to be safe, clear the arraylist of cards on the table
+		currentRound.clear();
+		// passing cards at start of game -- for now, no passing, but we would add it here
+		// passCards();
+	}
+
+	// Print the cards that were played so far this round
 	// be sure to pass in the index of the first player to get the names right
 	void printRound(int firstPlayer) {
 		System.out.println("Cards played this round:");
@@ -35,41 +58,14 @@ class Game {
 		System.out.println();
 	}
 
-	// return the index of the next player who will play // the player who takes this round
-	// pass in the index of the current first player
-	// we will go through currentRound to check who "wins"
-	// NOTE: you MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
+	// Return the index of the next player who will play // the player who takes this round
+	// Pass in the index of the current first player (to check who played what card)
+	// NOTE: This MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
 	int findTaker (int firstPlayer) {
 		return (firstPlayer+1)%playerOrder.size();
 	}
 
-	// call this every time a new game is played (or first game is initialized)
-	// this will shuffle the deck (stored in cardsPlayed) and clear player hands
-	void initNewGame () {
-		cardsPlayed.shuffleDeck();
-		// cardsPlayed.printDeck();
-		// cardsPlayed.checkDeck(); // we need a way to check that all 52 cards are here correctly
-		// clear the hands of all the players (to make sure they're not holding anything already!)
-		for (Player p : playerOrder) { p.clearHand(); }
-		// pass out all cards to the 4 players
-		for (int i = 0; i < 13; i++) { for (Player p : playerOrder) { p.addToHand ( cardsPlayed.drawTop() ); } }
-		// sort all hands
-		for (Player p : playerOrder) { p.sortHand(); }
-		// for debugging:
-		// for (Player p : playerOrder) { p.printHand(); }
-		// be careful with copy/move semantics
-		// cardsPlayed.printDeck();
-		// pick first player (the one who holds the two of clubs)
-		for (int i = 0; i < 4; i++) { if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; } }
-		// print message to say who plays first
-		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
-		// just to be safe, clear the arraylist of cards on the table
-		currentRound.clear();
-		// passing cards at start of game -- for now, no passing, but we would add it here
-		// passCards();
-	}
-
-	// go through the cards from the currentRound and calculate their point values
+	// Go through the cards from the currentRound and calculate their point values
 	int calculatePoints() {
 		int points = 0;
 		for (Card c : currentRound) {
@@ -79,7 +75,7 @@ class Game {
 		return points;
 	}
 
-	// print out how many points each player currently has
+	// Print out how many points each player currently has
 	void printPoints() {
 		for (Player p : playerOrder) {
 			System.out.println(p.getName() + " has " + p.getPoints() + " points.");
@@ -87,20 +83,17 @@ class Game {
 		System.out.println();
 	}
 
+	// Call this whenever you want to start a completely new game and play through it
 	void playNewGame() {
-
-		// we must call this to shuffle the deck and deal cards to all the players
+		// We must call this to shuffle the deck and deal cards to all the players
 		initNewGame();
-
-		// for all 13 rounds
+		// For all 13 rounds of the game...
 		for (int i = 1; i < 14; i++) {
 			System.out.println("--------------------------------------------");
 			System.out.println("Round #" +i+":");
 			System.out.println("--------------------------------------------\n");
-
 			// clear the table for this round
 			currentRound.clear();
-
 			// go through actions for all four players (ordered based on firstPlayer)
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
@@ -135,8 +128,7 @@ class Game {
         		*/
 			}
 
-			// for debugging: use this method to see what cards were played this round
-			// printRound(firstPlayer);
+			// printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
 
 			// 1. findTaker() will update who took the cards this round
 			// 2. calculatePoints() will calculate how many points this round consisted of
@@ -150,7 +142,7 @@ class Game {
 		}
 
 		System.out.println("This game has ended.");
-		//cardsPlayed.printDeck();
+		//cardsPlayed.printDeck(); 		// debugging to make sure that all cards have returned to the deck
 
 	}
 
