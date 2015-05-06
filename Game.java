@@ -11,7 +11,7 @@ class Game {
 	// arraylist like a circular queue -- and then modify firstPlayer every round
 	int firstPlayer;
 
-	Deck oldDeck;
+	Deck cardsPlayed;
 
 	Game (Deck deck, Player p1, Player p2, Player p3, Player p4) {
 	
@@ -37,8 +37,8 @@ class Game {
 		// for (Player p : playerOrder) { p.printHand(); }
 
 		// be careful with copy/move semantics
-		oldDeck = deck;
-		//oldDeck.printDeck();
+		cardsPlayed = deck;
+		//cardsPlayed.printDeck();
 
 		// pick first player (the one whose first card is two of clubs)
 		// and add everyone into the playing queue
@@ -47,32 +47,35 @@ class Game {
 		}
 
 		// debug message
-		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs.");
+		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
 
 		// passing cards at start of game -- for now, no passing
+
 	}
 
 	void playGame() {
 
-		System.out.println("The game has started.");
+		// we need to make sure that this is only called ONCE, after the game has been initialized
 
 		// for all 13 rounds
 		for (int i = 1; i < 14; i++) {
-			System.out.println("\n--------------------------------------------");
-			System.out.println("Round #" +i+":\n");
+			System.out.println("--------------------------------------------");
+			System.out.println("Round #" +i+":");
+			System.out.println("--------------------------------------------\n");
 
 			// go through actions for all four players (ordered based on firstPlayer)
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
-				
-				playerOrder.get(index).printHand();
 
-				Card played = playerOrder.get(index).performAction();
-				System.out.println(playerOrder.get(index).getName() + " played " + played.printCard() + ".");
+				Card playedCard = playerOrder.get(index).performAction();
+				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".\n");
+
+				// we *could* printHand() here, but it's better to have each player do that
+				// based on whether or not that player specifically needs to print hand or not
 
 				// now find a way to do player action, for both humans and AI
-				oldDeck.restockDeck( played );
+				cardsPlayed.restockDeck( playedCard );
 
 				// flush the screen (this is just for convenience for human players)
 				/*
@@ -90,7 +93,7 @@ class Game {
 		}
 
 		System.out.println("The game has ended.");
-		//oldDeck.printDeck();
+		//cardsPlayed.printDeck();
 
 	}
 
