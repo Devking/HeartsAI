@@ -247,6 +247,7 @@ class Game {
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
         		System.out.print(ANSI_CLS + ANSI_HOME);
+        		System.out.println();
         		System.out.flush();
         		
 			}
@@ -275,8 +276,8 @@ class Game {
 			final String ANSI_CLS = "\u001b[2J";
         	final String ANSI_HOME = "\u001b[H";
         	System.out.print(ANSI_CLS + ANSI_HOME);
+        	System.out.println();
         	System.out.flush();
-
 		}
 
 		// add function to deal with someone who shot the moon this game
@@ -292,6 +293,7 @@ class Game {
 		final String ANSI_CLS = "\u001b[2J";
         final String ANSI_HOME = "\u001b[H";
         System.out.print(ANSI_CLS + ANSI_HOME);
+        System.out.println();
         System.out.flush();
 		//cardsPlayed.printDeck(); 		// debugging to make sure that all cards have returned to the deck
 
