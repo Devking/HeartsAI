@@ -155,8 +155,24 @@ class Game {
 		return points;
 	}
 
-	// Print out how many points each player currently has
+	// Print out how many points each player currently has within this game
 	void printPoints() {
+		System.out.println("Points received this game:");
+		System.out.println("--------------------------");
+		for (Player p : playerOrder) {
+			System.out.println(p.getName() + " has " + p.getPoints() + " points.");
+		}
+		System.out.println();
+	}
+
+	void printWinner() {
+		System.out.println("won this round.\n");
+	}
+
+	// Print out how many points each player currently has between all games
+	void printTotalPoints() {
+		System.out.println("Total cumulative points between all games:");
+		System.out.println("------------------------------------------");
 		for (Player p : playerOrder) {
 			System.out.println(p.getName() + " has " + p.getPoints() + " points.");
 		}
@@ -248,7 +264,18 @@ class Game {
 
 		// add function to deal with someone who shot the moon this game
 		// shotTheMoon();
-		System.out.println("This game has ended.");
+		System.out.println("------------------------------------------");
+		System.out.println("Game Summary:");
+		System.out.println("------------------------------------------\n");
+		printPoints();
+		printWinner();
+		printTotalPoints();
+		Console console = System.console();
+		console.readLine("Press ENTER to start the next game.\n");
+		final String ANSI_CLS = "\u001b[2J";
+        final String ANSI_HOME = "\u001b[H";
+        System.out.print(ANSI_CLS + ANSI_HOME);
+        System.out.flush();
 		//cardsPlayed.printDeck(); 		// debugging to make sure that all cards have returned to the deck
 
 	}
