@@ -28,10 +28,15 @@
 
 - Make sure the player card selection is valid (within Game.java)  
 - Computation for who the next firstPlayer is (within Game.java)  
+- Finish state representations to be passed in to `performAction()`  
+- Get working low-play AI (plays lowest valid card option)  
+- Get working FSM AI  
+- Get working MCTS AI  
 
 ## Version Goals
 
-0.1.0 &mdash; full game implemented (with limited functionality)  
+0.1.0 &mdash; full game implemented (with limited state functionality)  
 1.0.0 &mdash; first full working game version (with all human players)  
 1.1.0 &mdash; full working game with basic low-play AI  
 1.2.0 &mdash; full working game with basic FSM AI
+1.3.0 &mdash; full working game with basic MCTS AI

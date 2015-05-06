@@ -6,6 +6,8 @@ class Game {
 	int firstPlayer;				// the index of the first player for this round
 	Deck cardsPlayed;				// cards that have already been played -- replace them into the deck
 	ArrayList<Card> currentRound;   // cards currently played on the table
+	boolean twoClubsPlayed; 		// a flag to check if the two of clubs has been played or not
+	boolean hasHeartsBroken;		// a flag to check if hearts has been broken
 
 	// Every game must have four players and one deck!
 	// Note: This WILL NOT shuffle the deck or deal the cards here
@@ -19,6 +21,8 @@ class Game {
 		firstPlayer = 0;
 		cardsPlayed = deck;
 		currentRound = new ArrayList<Card>();
+		twoClubsPlayed = false;
+		hasHeartsBroken = false;
 	}
 
 	// Call this every time a new game is played to shuffle the deck and clear player hands
@@ -58,6 +62,43 @@ class Game {
 		System.out.println();
 	}
 
+	// Return a bool based on whether the played card was valid or not
+	boolean checkRound (Card playedCard, int index) {
+
+		// first, do the two of clubs check
+		Card twoClubs = new Card(Suit.CLUBS, Value.TWO);
+		if (!twoClubsPlayed && !playedCard.equals(twoClubs)) { 
+			System.out.println("You must play the Two of Clubs to start the game.");
+			return false;
+		}
+		if (!twoClubsPlayed && playedCard.equals(twoClubs)) twoClubsPlayed = true;
+
+		// if playing hearts or queen first, check if hearts has been broken
+		// otherwise, just return true (they can play anything if hearts has broken)
+		if (currentRound.size() == 0) {
+			if (!hasHeartsBroken && playedCard.getSuit() == Suit.HEARTS) { 
+				System.out.println("Hearts has not broken yet. You cannot play a Heart suit.");
+				return false;
+			}
+			if (!hasHeartsBroken && playedCard.getSuit() == Suit.SPADES && playedCard.getValue() == Value.QUEEN) {
+				System.out.println("Hearts has not broken yet. You cannot play the Queen of Spades.");
+				return false;
+			}
+			return true;
+		}
+
+		// next, check the first card on the table and check the hand of the player playing
+
+		// if the card played is hearts, then hearts has broken
+		// playing queen of spades will NOT break hearts
+		if (playedCard.getSuit() == Suit.HEARTS) {
+			System.out.println("Hearts has been broken!");
+			hasHeartsBroken = true;
+		}
+
+		return true;
+	}
+
 	// Return the index of the next player who will play // the player who takes this round
 	// Pass in the index of the current first player (to check who played what card)
 	// NOTE: This MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
@@ -91,7 +132,7 @@ class Game {
 		for (int i = 1; i < 14; i++) {
 			System.out.println("--------------------------------------------");
 			System.out.println("Round #" +i+":");
-			System.out.println("--------------------------------------------\n");
+			System.out.println("--------------------------------------------");
 			// clear the table for this round
 			currentRound.clear();
 			// go through actions for all four players (ordered based on firstPlayer)
@@ -100,13 +141,23 @@ class Game {
 				int index = (j+firstPlayer) % playerOrder.size();
 				//printRound(firstPlayer); // for debugging: print the cards that were played this round
 
-				// ideally, we should pass in (a) cardsPlayed, (b) currentRound, (c) scores
-				// we should not be passing in the hands of other players (hidden information)
-				// each player will already know what cards they have
-				Card playedCard = playerOrder.get(index).performAction();
-				// we need to check if the playedCard is valid, given this currentRound
-				// if it is not valid, we need to loop over it again and get the player to pick another card
-				// checkRound(playedCard);
+				boolean validPlay = false;
+				Card playedCard = null;
+				while (!validPlay) {
+					// ideally, we should pass in (a) cardsPlayed, (b) currentRound, (c) scores
+					// we should not be passing in the hands of other players (hidden information)
+					// each player will already know what cards they have
+					playedCard = playerOrder.get(index).performAction();
+					// we need to check if the playedCard is valid, given this currentRound
+					// if it is not valid, we need to loop over it again and get the player to pick another card
+					validPlay = checkRound(playedCard, index);
+					// if the card was not valid, put it back in the hand and sort the hand (this might be SLOW)
+					if (!validPlay) {
+						System.out.println("This was an invalid play. Please pick a valid card.");
+						playerOrder.get(index).addToHand(playedCard);
+						playerOrder.get(index).sortHand();
+					}
+				}
 
 				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".");
 				// we *could* printHand() here, but it's better to have each player do that
@@ -139,6 +190,8 @@ class Game {
 
 		}
 
+		// add function to deal with someone who shot the moon this game
+		// shotTheMoon();
 		System.out.println("This game has ended.");
 		//cardsPlayed.printDeck(); 		// debugging to make sure that all cards have returned to the deck
 
