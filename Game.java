@@ -1,15 +1,19 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.Console;
 
 class Game {
 
-	ArrayList<Player> playerOrder;	// think of this as a circular queue of the 4 players
-	int firstPlayer;				// the index of the first player for this round
-	Deck cardsPlayed;				// cards that have already been played -- replace them into the deck
-	ArrayList<Card> currentRound;   // cards currently played on the table
-	boolean twoClubsPlayed; 		// a flag to check if the two of clubs has been played or not
-	boolean hasHeartsBroken;		// a flag to check if hearts has been broken
+	ArrayList<Player> playerOrder;		// think of this as a circular queue of the 4 players
+	int firstPlayer;					// the index of the first player for this round
+	Deck cardsPlayed;					// cards that have already been played -- replace them into the deck
+	ArrayList<Card> currentRound;   	// cards currently played on the table
+	boolean twoClubsPlayed; 			// a flag to check if the two of clubs has been played or not
+	boolean hasHeartsBroken;			// a flag to check if hearts has been broken
 	ArrayList<Integer> playerScores; 	// keep track of the player scores within this game
+	Scanner in = new Scanner(System.in);// For scanner
+	
+	String s;							// For scanner
 
 	// Every game must have four players and one deck!
 	// Note: This WILL NOT shuffle the deck or deal the cards here
@@ -59,7 +63,9 @@ class Game {
 		// flush the screen -- only for human players to debug
 		final String ANSI_CLS = "\u001b[2J";
         final String ANSI_HOME = "\u001b[H";
+        System.out.println();
        	System.out.print(ANSI_CLS + ANSI_HOME);
+       	System.out.println();
         System.out.flush();
 	}
 
@@ -246,6 +252,7 @@ class Game {
 				// flush the screen (this is just for convenience for human players)
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
+        		System.out.println();
         		System.out.print(ANSI_CLS + ANSI_HOME);
         		System.out.println();
         		System.out.flush();
@@ -270,11 +277,16 @@ class Game {
 
 			// FOR HUMAN PLAYERS ONLY: Get round statistics and then flush
 			// How to turn this on if it's a human player -- we should set some flags
-			Console console = System.console();
-			if (i < 13) console.readLine("Press ENTER to continue to the next round.\n");
-			else console.readLine("PRESS ENTER TO END THIS GAME.\n");
+		      
+			//Console console = System.console();
+			//if (i < 13) console.readLine("Press ENTER to continue to the next round.\n");
+			//else console.readLine("PRESS ENTER TO END THIS GAME.\n");
+			if (i < 13) System.out.println("Press ENTER to continue to the next round.\n");
+			else System.out.println("PRESS ENTER TO END THIS GAME.\n");
+		    s = in.nextLine();
 			final String ANSI_CLS = "\u001b[2J";
         	final String ANSI_HOME = "\u001b[H";
+        	System.out.println();
         	System.out.print(ANSI_CLS + ANSI_HOME);
         	System.out.println();
         	System.out.flush();
@@ -288,8 +300,10 @@ class Game {
 		printPoints();
 		printWinner();
 		printTotalPoints();
-		Console console = System.console();
-		console.readLine("Press ENTER to start the next game.\n");
+		//Console console = System.console();
+		//console.readLine("Press ENTER to start the next game.\n");
+		System.out.println("Press ENTER to start the next game.\n");
+	    s = in.nextLine();
 		final String ANSI_CLS = "\u001b[2J";
         final String ANSI_HOME = "\u001b[H";
         System.out.print(ANSI_CLS + ANSI_HOME);
