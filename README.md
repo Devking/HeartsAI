@@ -23,10 +23,10 @@
 0.0.7 &mdash; game keeps track of scores between games; games do initialization properly now  
 0.0.8 &mdash; HumanPlayer can now select which card to play, with Exception Handling!  
 0.0.9 &mdash; Added card "shorthand" display using unicode characters (and reordered suits)  
+0.0.10 &mdash; Game now checks if the played card by the Player is valid! (for ALL cases)  
 
 ### Things To Do
 
-- Make sure the player card selection is valid (within Game.java)  
 - Computation for who the next firstPlayer is (within Game.java)  
 - Finish state representations to be passed in to `performAction()`  
 - Get working low-play AI (plays lowest valid card option)  

@@ -38,6 +38,13 @@ abstract class Player {
 		return holder.equals(hand.get(0));
 	}
 
+	// Used to check if all the cards in this player's hand is hearts
+	boolean hasAllHearts() {
+		boolean flag = true;
+		for (Card c : hand) { if (c.getSuit() != Suit.HEARTS) flag = false; }
+		return flag;
+	}
+
 	// prints the hand that the player currently has
 	void printHand () {
 		System.out.print("\n" + name + "`s hand ("+hand.size()+" card");

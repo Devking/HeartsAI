@@ -48,6 +48,13 @@ class Game {
 		// passCards();
 	}
 
+	// Given the index of the player, check if that player only has hearts left
+	// If this is the case, then we must break hearts to let this player make a move
+	void checkHeartsOnly(int index) {
+		boolean flag = playerOrder.get(index).hasAllHearts();
+		if (flag) hasHeartsBroken = true;
+	}
+
 	// Print the cards that were played so far this round
 	// be sure to pass in the index of the first player to get the names right
 	void printRound(int firstPlayer) {
@@ -91,7 +98,7 @@ class Game {
 
 		// if the card played is hearts, then hearts has broken
 		// playing queen of spades will NOT break hearts
-		if (playedCard.getSuit() == Suit.HEARTS) {
+		if (playedCard.getSuit() == Suit.HEARTS && !hasHeartsBroken) {
 			System.out.println("Hearts has been broken!");
 			hasHeartsBroken = true;
 		}
@@ -140,7 +147,7 @@ class Game {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
 				//printRound(firstPlayer); // for debugging: print the cards that were played this round
-
+				if (j == 0) checkHeartsOnly(index);		// if this is the first player this round, check if only hearts
 				boolean validPlay = false;
 				Card playedCard = null;
 				while (!validPlay) {
