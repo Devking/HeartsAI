@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.Console;
 
 class Game {
 
@@ -11,8 +10,7 @@ class Game {
 	boolean twoClubsPlayed; 			// a flag to check if the two of clubs has been played or not
 	boolean hasHeartsBroken;			// a flag to check if hearts has been broken
 	ArrayList<Integer> playerScores; 	// keep track of the player scores within this game
-	Scanner in = new Scanner(System.in);// For scanner
-	
+	Scanner in = new Scanner(System.in);// For scanner input
 	String s;							// For scanner
 
 	// Every game must have four players and one deck!
@@ -30,6 +28,7 @@ class Game {
 		twoClubsPlayed = false;
 		hasHeartsBroken = false;
 		playerScores = new ArrayList<Integer>();
+		in = new Scanner(System.in);
 	}
 
 	// Call this every time a new game is played to shuffle the deck and clear player hands
@@ -281,8 +280,8 @@ class Game {
 			//Console console = System.console();
 			//if (i < 13) console.readLine("Press ENTER to continue to the next round.\n");
 			//else console.readLine("PRESS ENTER TO END THIS GAME.\n");
-			if (i < 13) System.out.println("Press ENTER to continue to the next round.\n");
-			else System.out.println("PRESS ENTER TO END THIS GAME.\n");
+			if (i < 13) System.out.println("Press ENTER to continue to the next round.");
+			else System.out.println("PRESS ENTER TO END THIS GAME.");
 		    s = in.nextLine();
 			final String ANSI_CLS = "\u001b[2J";
         	final String ANSI_HOME = "\u001b[H";
@@ -300,9 +299,7 @@ class Game {
 		printPoints();
 		printWinner();
 		printTotalPoints();
-		//Console console = System.console();
-		//console.readLine("Press ENTER to start the next game.\n");
-		System.out.println("Press ENTER to start the next game.\n");
+		System.out.println("Press ENTER to start the next game.");
 	    s = in.nextLine();
 		final String ANSI_CLS = "\u001b[2J";
         final String ANSI_HOME = "\u001b[H";
