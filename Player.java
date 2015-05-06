@@ -43,11 +43,11 @@ abstract class Player {
 		System.out.print("\n" + name + "`s hand ("+hand.size()+" card");
 		if (hand.size() > 1) System.out.print("s");
 		System.out.print("):\n|");
-		for (int i = 0; i < hand.size(); i++) { System.out.format("%2d|", i); }
+		for (int i = 0; i < hand.size(); i++) { System.out.format("%3d|", i); }
 		System.out.print("\n|");
 		for (int i = 0; i < hand.size(); i++) { 
 			// we can either use printCard() or printCardShort()
-			System.out.print(hand.get(i).printCardShort() + "|"); 
+			System.out.format("%3s|", hand.get(i).printCardShort()); 
 		}
 		System.out.println("");
 	}

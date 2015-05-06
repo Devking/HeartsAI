@@ -1,4 +1,4 @@
-public enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }
+public enum Suit { CLUBS, DIAMONDS, SPADES, HEARTS }
 
 /*
 How to compare enums:
