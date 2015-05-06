@@ -12,6 +12,7 @@ class Game {
 	int firstPlayer;
 
 	Deck cardsPlayed;
+	ArrayList<Card> currentRound;
 
 	Game (Deck deck, Player p1, Player p2, Player p3, Player p4) {
 	
@@ -48,9 +49,25 @@ class Game {
 
 		// debug message
 		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
+		currentRound = new ArrayList<Card>();
 
 		// passing cards at start of game -- for now, no passing
 
+
+	}
+
+	// print the cards that were played so far this round
+	// be sure to pass in the index of the first player to get the names right
+	void printRound(int firstPlayer) {
+		System.out.println("Cards played this round:");
+		if (currentRound.size() == 0) {
+			System.out.println("No cards have been played this round.");
+		}
+		for (int i = 0; i < currentRound.size(); i++) {
+			int index = (i+firstPlayer) % playerOrder.size();
+			System.out.println(playerOrder.get(index).getName() + " played " + currentRound.get(i).printCard());
+		}
+		System.out.println();
 	}
 
 	void playGame() {
@@ -63,16 +80,25 @@ class Game {
 			System.out.println("Round #" +i+":");
 			System.out.println("--------------------------------------------\n");
 
+			currentRound.clear();
+
 			// go through actions for all four players (ordered based on firstPlayer)
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
+
+				// for debugging: print the cards that were played this round
+				//printRound(firstPlayer);
 
 				Card playedCard = playerOrder.get(index).performAction();
 				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".\n");
 
 				// we *could* printHand() here, but it's better to have each player do that
 				// based on whether or not that player specifically needs to print hand or not
+
+				// add the played card to the currentRound
+				// BE CAREFUL! We will be adding a direct pointer to the card here!
+				currentRound.add(playedCard);
 
 				// now find a way to do player action, for both humans and AI
 				cardsPlayed.restockDeck( playedCard );
@@ -85,6 +111,8 @@ class Game {
         		System.out.flush();
         		*/
 			}
+
+			printRound(firstPlayer);
 
 			// update who is firstPlayer
 			// right now, for debugging, we move the firstPlayer over by 1 every round
