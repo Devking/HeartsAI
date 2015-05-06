@@ -101,15 +101,11 @@ class Game {
 		}
 		if (!twoClubsPlayed && playedCard.equals(twoClubs)) twoClubsPlayed = true;
 
-		// if playing hearts or queen first, check if hearts has been broken
+		// if playing hearts first, check if hearts has been broken
 		// otherwise, just return true (they can play anything if hearts has broken)
 		if (currentRound.size() == 0) {
 			if (!hasHeartsBroken && playedCard.getSuit() == Suit.HEARTS) { 
 				System.out.println("Hearts has not broken yet. You cannot play a Heart suit.");
-				return false;
-			}
-			if (!hasHeartsBroken && playedCard.getSuit() == Suit.SPADES && playedCard.getValue() == Value.QUEEN) {
-				System.out.println("Hearts has not broken yet. You cannot play the Queen of Spades.");
 				return false;
 			}
 			return true;
