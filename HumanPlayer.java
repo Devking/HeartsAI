@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.util.ArrayList;
 
 class HumanPlayer extends Player {
 	
@@ -10,7 +11,7 @@ class HumanPlayer extends Player {
 		System.out.println("Human player ("+name+") initialized."); 
 	}
 
-	Card performAction () {
+	Card performAction (ArrayList<Card> currentRound) {
 		boolean flag = true;
 		int i = 0;
 		// run a while loop to make sure the user keeps inputting until valid input

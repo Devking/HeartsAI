@@ -181,10 +181,14 @@ class Game {
 				boolean validPlay = false;
 				Card playedCard = null;
 				while (!validPlay) {
+
 					// ideally, we should pass in (a) cardsPlayed, (b) currentRound, (c) scores
 					// we should not be passing in the hands of other players (hidden information)
 					// each player will already know what cards they have
-					playedCard = playerOrder.get(index).performAction();
+
+					// be sure to pass in copies, so that the player can't modify the game state
+					playedCard = playerOrder.get(index).performAction( new ArrayList<Card>(currentRound) );
+
 					// we need to check if the playedCard is valid, given this currentRound
 					// if it is not valid, we need to loop over it again and get the player to pick another card
 					validPlay = checkRound(playedCard, index);

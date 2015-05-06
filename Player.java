@@ -66,7 +66,13 @@ abstract class Player {
 		System.out.println("");
 	}
 
+	// Get the first suit that was played this round
+	Suit getFirstSuit(ArrayList<Card> currentRound) {
+		if (currentRound.size() == 0) return null;
+		return currentRound.get(0).getSuit();
+	}
+
 	// Given any sort of player, make a decision to play a card
-	abstract Card performAction ();
+	abstract Card performAction (ArrayList<Card> currentRound);
 
 }

@@ -1,7 +1,7 @@
 public class Hearts {
 	public static void main(String[] args) {
-		System.out.println("Welcome to Hearts version 0.0.10.");
-		System.out.println("(First playable version will be 1.0.0.)\n");
+		System.out.println("Welcome to Hearts version 0.1.0.");
+		System.out.println("(First fully playable version will be 1.0.0.)\n");
 
 		// separate deck and four players from game
 		Deck thing = new Deck();
@@ -10,7 +10,7 @@ public class Hearts {
 		Player p1 = new HumanPlayer("Wells");
 		Player p2 = new HumanPlayer("Jai");
 		Player p3 = new HumanPlayer("Ant");
-		Player p4 = new HumanPlayer("Julian");
+		Player p4 = new LowPlayAI("Julian");
 
 		// at the end of every game, we will have all the cards back in the deck
 		// thing.printDeck();

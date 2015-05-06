@@ -26,10 +26,11 @@
 0.0.10 &mdash; Game now checks if the played card by the Player is valid! (for ALL cases)  
 0.0.11 &mdash; Game now checks who the "winner" of each round is!  
 0.1.0 &mdash; First full game implemented! (With no state tracking functionality for AI)  
+0.2.0 &mdash; Game now passes in `currentRound` to `performAction()`  
+0.3.0 &mdash; Working Low-Play AI has been completed
 
 ### Things To Do
 
-- Get working low-play AI (plays lowest valid card option)  
 - Finish state representations to be passed in to `performAction()`  
 - Get working FSM AI  
 - Get working MCTS AI  
