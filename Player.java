@@ -45,6 +45,13 @@ abstract class Player {
 		return flag;
 	}
 
+	// given a suit, check if the hand has that suit
+	boolean checkSuit(Suit check) {
+		boolean flag = false;
+		for (Card c: hand) { if (c.getSuit() == check) flag = true; }
+		return flag;
+	}
+
 	// prints the hand that the player currently has
 	void printHand () {
 		System.out.print("\n" + name + "`s hand ("+hand.size()+" card");

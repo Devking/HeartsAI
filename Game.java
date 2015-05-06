@@ -95,6 +95,12 @@ class Game {
 		}
 
 		// next, check the first card on the table and check the hand of the player playing
+		// we can only get to this step if there already is a card on the table!
+		Suit firstSuit = currentRound.get(0).getSuit();
+		if (playerOrder.get(index).checkSuit(firstSuit) && playedCard.getSuit() != firstSuit) {
+			System.out.println("You still have a card that is " + firstSuit + ". You must play that first.");
+			return false;
+		}
 
 		// if the card played is hearts, then hearts has broken
 		// playing queen of spades will NOT break hearts
