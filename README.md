@@ -6,7 +6,7 @@
 - Card class (for each individual card)  
 - Deck class (for the "deck" to deal hands)  
 - Hand class (for each of the hands)  
-- Game class (plays one game)
+- Game class (plays one game)  
 - Player abstract class (defines base functionality for any player)  
 
 - HumanPlayer class extends Player (`performAction()` allows human input)  
