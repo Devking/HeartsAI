@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.Console;
 
 class Game {
 
@@ -228,6 +229,14 @@ class Game {
 			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " played the highest card "
 				+ "and took " + points + " points this round.\n");
 			printPoints();
+
+			// FOR HUMAN PLAYERS ONLY: Get round statistics and then flush
+			Console console = System.console();
+			console.readLine("\nPress ENTER to continue to the next round.\n");
+			final String ANSI_CLS = "\u001b[2J";
+        	final String ANSI_HOME = "\u001b[H";
+        	System.out.print(ANSI_CLS + ANSI_HOME);
+        	System.out.flush();
 
 		}
 
