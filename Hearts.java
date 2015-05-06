@@ -7,7 +7,7 @@ public class Hearts {
 		Deck thing = new Deck();
 
 		// assume this order is clockwise
-		Player p1 = new LowPlayAI("Wells");
+		Player p1 = new HumanPlayer("Wells");
 		Player p2 = new LowPlayAI("Jai");
 		Player p3 = new LowPlayAI("Ant");
 		Player p4 = new LowPlayAI("Julian");
