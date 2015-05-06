@@ -59,25 +59,28 @@ class Game {
 		// for all 13 rounds
 		for (int i = 1; i < 14; i++) {
 			System.out.println("\n--------------------------------------------");
-			System.out.println("Round #" +i+":");
+			System.out.println("Round #" +i+":\n");
 
 			// go through actions for all four players (ordered based on firstPlayer)
 			for (int j = 0; j < 4; j++) {
+				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
 				
 				playerOrder.get(index).printHand();
 
 				Card played = playerOrder.get(index).performAction();
-				System.out.println(playerOrder.get(j).getName() + " played " + played.printCard() + ".");
+				System.out.println(playerOrder.get(index).getName() + " played " + played.printCard() + ".");
 
 				// now find a way to do player action, for both humans and AI
 				oldDeck.restockDeck( played );
 
 				// flush the screen (this is just for convenience for human players)
+				/*
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
         		System.out.print(ANSI_CLS + ANSI_HOME);
         		System.out.flush();
+        		*/
 			}
 
 			// update who is firstPlayer

@@ -13,11 +13,11 @@ abstract class Player {
 
 	// prints the hand that the player currently has
 	void printHand () {
-		System.out.println(name + "`s hand:");
-		for (Card c : hand) {
-			System.out.print(c.printCard() + " | ");
-		}
-		System.out.println("\nSize of Hand: " + hand.size() + "\n");
+		System.out.print(name + "`s hand ("+hand.size()+" card");
+		if (hand.size() > 1) System.out.print("s");
+		System.out.println("):");
+		for (Card c : hand) { System.out.print(c.printCard() + " | "); }
+		System.out.println("\n");
 	}
 
 	void sortHand () {
