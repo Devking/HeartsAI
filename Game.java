@@ -85,7 +85,9 @@ class Game {
 		}
 		for (int i = 0; i < currentRound.size(); i++) {
 			int index = (i+firstPlayer) % playerOrder.size();
-			System.out.println(playerOrder.get(index).getName() + " played " + currentRound.get(i).printCard() + ".");
+			// be careful with the format length -- potentially check for longest name length
+			System.out.format("%10s", playerOrder.get(index).getName());
+			System.out.println(" played " + currentRound.get(i).printCardShort());
 		}
 		//System.out.println();
 	}

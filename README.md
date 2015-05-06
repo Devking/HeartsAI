@@ -40,6 +40,5 @@
 ## Version Goals
 
 1.0.0 &mdash; first full working game version (with all human players)  
-1.1.0 &mdash; full working game with basic low-play AI  
 1.2.0 &mdash; full working game with basic FSM AI
 1.3.0 &mdash; full working game with basic MCTS AI
