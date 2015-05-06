@@ -29,6 +29,7 @@
 0.2.0 &mdash; Game now passes in `currentRound` to `performAction()`  
 0.3.0 &mdash; Working Low-Play AI has been completed
 0.4.0 &mdash; Added score-tracking statistics
+0.5.0 &mdash; Shooting the moon is implemented -- minor bug fixes as well
 
 ### Things To Do
 

@@ -212,6 +212,8 @@ class Game {
 				if (i != index) playerOrder.get(i).addPoints(26);
 				else playerOrder.get(i).addPoints(-26);
 			}
+			if (playerOrder.get(index).getPoints() < 0)
+				playerOrder.get(index).clearPlayer();
 		}
 	}
 
