@@ -1,6 +1,6 @@
 public class Hearts {
 	public static void main(String[] args) {
-		System.out.println("Welcome to Hearts version 0.0.3.");
+		System.out.println("Welcome to Hearts version 0.0.5.");
 
 		// separate deck and four players from game
 		Deck thing = new Deck();

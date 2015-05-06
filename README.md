@@ -18,6 +18,8 @@
 0.0.1 &mdash; just setting all of the infrastructure up and testing some java things  
 0.0.2 &mdash; implemented abstract player as well as basic human player skeleton  
 0.0.3 &mdash; begun implementation for game playouts  
+0.0.4 &mdash; able to do multiple playouts of the game
+0.0.5 &mdash; able to keep track of cards played for each round
 
 ### Version Goals
 
