@@ -104,6 +104,10 @@ class Game {
 				// we should not be passing in the hands of other players (hidden information)
 				// each player will already know what cards they have
 				Card playedCard = playerOrder.get(index).performAction();
+				// we need to check if the playedCard is valid, given this currentRound
+				// if it is not valid, we need to loop over it again and get the player to pick another card
+				// checkRound(playedCard);
+
 				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".");
 				// we *could* printHand() here, but it's better to have each player do that
 				// based on whether or not that player specifically needs to print hand or not

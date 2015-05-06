@@ -40,11 +40,13 @@ abstract class Player {
 
 	// prints the hand that the player currently has
 	void printHand () {
-		System.out.print(name + "`s hand ("+hand.size()+" card");
+		System.out.print("\n" + name + "`s hand ("+hand.size()+" card");
 		if (hand.size() > 1) System.out.print("s");
 		System.out.println("):");
-		for (Card c : hand) { System.out.print(c.printCard() + " | "); }
-		System.out.println("\n");
+		for (int i = 0; i < hand.size(); i++) { 
+			System.out.print("(" + i + ") " + hand.get(i).printCard() + " | "); 
+		}
+		System.out.println("");
 	}
 
 	// Given any sort of player, make a decision to play a card

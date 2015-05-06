@@ -10,7 +10,6 @@
 - Player abstract class (defines base functionality for any player)  
 
 - HumanPlayer class extends Player (`performAction()` allows human input)  
-
 - Hearts class (this is the main file that brings it all together)  
 
 ## Version History
@@ -22,13 +21,13 @@
 0.0.5 &mdash; able to keep track of cards played for each round  
 0.0.6 &mdash; game keeps track of the scores of each player now!  
 0.0.7 &mdash; game keeps track of scores between games; games do initialization properly now  
+0.0.8 &mdash; HumanPlayer can now select which card to play, with Exception Handling!  
 
 ### Things To Do
 
-- Rules for playing cards each round  
-- Functionality for human players to pick cards per round  
+- Make sure the player card selection is valid (within Game.java)  
 - Displaying cards as "4H" rather than "FOUR OF HEARTS"  
-- Computation for who the next firstPlayer is  
+- Computation for who the next firstPlayer is (within Game.java)  
 
 ## Version Goals
 
