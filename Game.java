@@ -66,6 +66,7 @@ class Game {
 	// be sure to pass in the index of the first player to get the names right
 	void printRound(int firstPlayer) {
 		System.out.println("\nCards played this round:");
+		System.out.println("------------------------");
 		if (currentRound.size() == 0) {
 			System.out.println("No cards have been played this round.");
 		}
@@ -218,6 +219,9 @@ class Game {
         		
 			}
 
+			System.out.println("--------------------------------------------");
+			System.out.println("Round " + i + " Summary:");
+			System.out.println("--------------------------------------------");
 			 printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
 
 			// 1. findTaker() will update who took the cards this round
@@ -231,8 +235,10 @@ class Game {
 			printPoints();
 
 			// FOR HUMAN PLAYERS ONLY: Get round statistics and then flush
+			// How to turn this on if it's a human player -- we should set some flags
 			Console console = System.console();
-			console.readLine("\nPress ENTER to continue to the next round.\n");
+			if (i < 13) console.readLine("Press ENTER to continue to the next round.\n");
+			else console.readLine("PRESS ENTER TO END THIS GAME.\n");
 			final String ANSI_CLS = "\u001b[2J";
         	final String ANSI_HOME = "\u001b[H";
         	System.out.print(ANSI_CLS + ANSI_HOME);
