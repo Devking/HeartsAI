@@ -174,7 +174,15 @@ class Game {
 	}
 
 	void printWinner() {
-		System.out.println("won this round.\n");
+		int smallestScore = playerOrder.get(0).getPoints();
+		int index = 0;
+		for (int i = 0; i < playerOrder.size(); i++) {
+			if (smallestScore > playerOrder.get(i).getPoints()) {
+				index = i;
+				smallestScore = playerOrder.get(i).getPoints();
+			}
+		}
+		System.out.println(playerOrder.get(index).getName() + " is in the lead after this round.\n");
 	}
 
 	// Print out how many points each player currently has between all games
