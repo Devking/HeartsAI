@@ -31,10 +31,10 @@ class Card implements Comparable<Card> {
 			case ACE: shorthand += "A"; break;
 		}
 		switch(suit) {
-			case HEARTS: shorthand += "\u2661"; break;
 			case SPADES: shorthand += "\u2660"; break;
-			case CLUBS: shorthand += "\u2663"; break;
+			case HEARTS: shorthand += "\u2661"; break;
 			case DIAMONDS: shorthand += "\u2662"; break;
+			case CLUBS: shorthand += "\u2663"; break;
 		}
 	}
 
