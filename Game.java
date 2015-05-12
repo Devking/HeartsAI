@@ -3,15 +3,15 @@ import java.util.Scanner;
 
 class Game {
 
-	ArrayList<Player> playerOrder;		// think of this as a circular queue of the 4 players
-	int firstPlayer;				// the index of the first player for this round
-	Deck cardsPlayed;				// cards that have already been played -- replace them into the deck
-	ArrayList<Card> currentRound;   	// cards currently played on the table
-	boolean twoClubsPlayed; 			// a flag to check if the two of clubs has been played or not
-	boolean hasHeartsBroken;			// a flag to check if hearts has been broken
-	ArrayList<Integer> playerScores; 	// keep track of the player scores within this game
-	Scanner in = new Scanner(System.in);	// For scanner input
-	String s;							// For scanner
+	ArrayList<Player> playerOrder;			// think of this as a circular queue of the 4 players
+	int firstPlayer;						// the index of the first player for this round
+	Deck cardsPlayed;						// cards that have already been played -- replace them into the deck
+	ArrayList<Card> currentRound;   		// cards currently played on the table
+	boolean twoClubsPlayed; 				// a flag to check if the two of clubs has been played or not
+	boolean hasHeartsBroken;				// a flag to check if hearts has been broken
+	ArrayList<Integer> playerScores; 		// keep track of the player scores within this game
+	Scanner in;								// For scanner input
+	String s;								// To store scanner input
 
 	// Every game must have four players and one deck!
 	// Note: This WILL NOT shuffle the deck or deal the cards here
@@ -179,6 +179,7 @@ class Game {
 		System.out.println();
 	}
 
+	// Print the person who is in the lead after this game
 	void printWinner() {
 		int smallestScore = playerOrder.get(0).getPoints();
 		int index = 0;
@@ -201,7 +202,7 @@ class Game {
 		System.out.println();
 	}
 
-	// end-game functionality for shooting the moon
+	// Rnd-game functionality for shooting the moon
 	void shotTheMoon () {
 		int index = -1;
 		for (int i = 0; i < playerScores.size(); i++) {
@@ -210,10 +211,11 @@ class Game {
 				index = i;
 			}
 		}
-		//New Moon rule where the player loses 26 points
+		// Old Moon: Player does not gain points this round, all others gain 26 points
 		if (index > -1) {
 			for (int i = 0; i < playerOrder.size(); i++) {
 				if (i != index) playerOrder.get(i).addPoints(26);
+				// Remove the 26 points that this player received this round
 				else playerOrder.get(i).addPoints(-26);
 			}
 			if (playerOrder.get(index).getPoints() < 0)
