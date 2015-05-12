@@ -4,13 +4,13 @@ import java.util.Scanner;
 class Game {
 
 	ArrayList<Player> playerOrder;		// think of this as a circular queue of the 4 players
-	int firstPlayer;					// the index of the first player for this round
-	Deck cardsPlayed;					// cards that have already been played -- replace them into the deck
+	int firstPlayer;				// the index of the first player for this round
+	Deck cardsPlayed;				// cards that have already been played -- replace them into the deck
 	ArrayList<Card> currentRound;   	// cards currently played on the table
 	boolean twoClubsPlayed; 			// a flag to check if the two of clubs has been played or not
 	boolean hasHeartsBroken;			// a flag to check if hearts has been broken
 	ArrayList<Integer> playerScores; 	// keep track of the player scores within this game
-	Scanner in = new Scanner(System.in);// For scanner input
+	Scanner in = new Scanner(System.in);	// For scanner input
 	String s;							// For scanner
 
 	// Every game must have four players and one deck!
@@ -45,7 +45,7 @@ class Game {
 		// for (Player p : playerOrder) { p.printHand(); }		// for debugging to check all the hands are valid
 		// cardsPlayed.printDeck();								// for debugging to check all cards have been dealt
 		// pick first player (the one who holds the two of clubs)
-		for (int i = 0; i < 4; i++) { if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; } }
+		for (int i = 0; i < 4; i++) { if (playerOrder.get(i).hasTwoOfClubs() ) { firstPlayer = i; break; } }
 		// print message to say who plays first
 		System.out.println(playerOrder.get(firstPlayer).getName() + " has the two of clubs and will play first.\n");
 		// just to be safe, clear the arraylist of cards on the table
@@ -210,6 +210,7 @@ class Game {
 				index = i;
 			}
 		}
+		//New Moon rule where the player loses 26 points
 		if (index > -1) {
 			for (int i = 0; i < playerOrder.size(); i++) {
 				if (i != index) playerOrder.get(i).addPoints(26);
