@@ -1,13 +1,13 @@
 public class Hearts {
 	public static void main(String[] args) {
-		System.out.println("Welcome to Hearts version 0.6.4.");
+		System.out.println("Welcome to Hearts version 0.6.5.");
 		System.out.println("(First fully playable version will be 1.0.0.)\n");
 
-		// separate deck and four players from game
+		// Initalize the deck of cards
 		Deck thing = new Deck();
 
-		// assume this order is clockwise
-		Player p1 = new LowPlayAI("Wells");
+		// Assume this order is clockwise
+		Player p1 = new LookAheadPlayer("Wells");
 		// Player p1 = new HumanPlayer("Wells");
 		Player p2 = new RandomPlayAI("Jai");
 		Player p3 = new LowPlayAI("Ant");

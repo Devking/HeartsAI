@@ -1,18 +1,18 @@
-// The ultimate MCTS player
+// LookAheadPlayer
 
 import java.util.*;
 import java.util.ArrayList;
 
-class MCTSPlayer extends Player {
+class LookAheadPlayer extends Player {
 
 	// Instead of changing the hand, we will change the playoutHand
 	// when performing random playouts
 	ArrayList<Card> playoutHand;
 	Random rng;
 
-	MCTSPlayer(String name) { 
+	LookAheadPlayer(String name) { 
 		super(name); 
-		System.out.println("MCTSPlayer AI ("+name+") initialized."); 
+		System.out.println("LookAheadPlayer AI ("+name+") initialized."); 
 		playoutHand = new ArrayList<Card>(hand);
 		rng = new Random();
 	}

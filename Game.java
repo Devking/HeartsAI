@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 class Game {
 
+	boolean 			debug = false;			// set to true for debug printouts or if human player
+
 	ArrayList<Player> 	playerOrder;			// think of this as a circular queue of the 4 players
 	int 				firstPlayer;			// the index of the first player for this round
 	Deck 				cardsPlayed;			// cards that have already been played -- replace them into the deck
@@ -279,10 +281,12 @@ class Game {
         		
 			}
 
-			System.out.println("--------------------------------------------");
-			System.out.println("Round " + i + " Summary:");
-			System.out.println("--------------------------------------------");
-			printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
+			if (debug) {
+				System.out.println("--------------------------------------------");
+				System.out.println("Round " + i + " Summary:");
+				System.out.println("--------------------------------------------");
+				printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
+			}
 
 			// 1. findTaker() will update who took the cards this round
 			// 2. calculatePoints() will calculate how many points this round consisted of
@@ -291,22 +295,25 @@ class Game {
 			int points = calculatePoints();
 			playerScores.set(firstPlayer,playerScores.get(firstPlayer)+points);
 			playerOrder.get(firstPlayer).addPoints(points);
-			System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " played the highest card "
-				+ "and took " + points + " points this round.\n");
-			printPoints();
+			
+			if (debug) {
+				System.out.println("\n" + playerOrder.get(firstPlayer).getName() + " played the highest card "
+					+ "and took " + points + " points this round.\n");
+				printPoints();
+			}
 
-			// FOR HUMAN PLAYERS ONLY: Get round statistics and then flush
-			// How to turn this on *only* if it's a human player -- we should set some flags
-		
-			if (i < 13) System.out.println("Press ENTER to continue to the next round.");
-			else System.out.println("PRESS ENTER TO END THIS GAME.");
-		    s = in.nextLine();
-			final String ANSI_CLS = "\u001b[2J";
-        	final String ANSI_HOME = "\u001b[H";
-        	System.out.println();
-        	System.out.print(ANSI_CLS + ANSI_HOME);
-        	System.out.println();
-        	System.out.flush();
+			// FOR HUMAN PLAYERS AND DEBUG ONLY: Get round statistics and then flush
+			if (debug) {
+				if (i < 13) System.out.println("Press ENTER to continue to the next round.");
+				else System.out.println("PRESS ENTER TO END THIS GAME.");
+			    s = in.nextLine();
+				final String ANSI_CLS = "\u001b[2J";
+	        	final String ANSI_HOME = "\u001b[H";
+	        	System.out.println();
+	        	System.out.print(ANSI_CLS + ANSI_HOME);
+	        	System.out.println();
+	        	System.out.flush();
+        	}
 		}
 
 		// Check if someone shot the moon

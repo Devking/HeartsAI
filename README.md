@@ -35,6 +35,7 @@
 0.6.2 &mdash;  Added functionality to return the range of cards in any given suit  
 0.6.3 &mdash;  **RandomPlayAI** has been implemented completely and is working  
 0.6.4 &mdash;  **MCTSPlayer** implementation has begun  
+0.6.5 &mdash;  **LookAheadPlayer** implementation has begun  
 
 ### Things To Do
 
