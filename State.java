@@ -33,4 +33,7 @@ class State {
 	// Note: We start counting from Round 1
 	int getRoundNumber() { return cardsPlayed.size()/4 + 1; }
 	
+	// If the Deck still does not have every card played, then the game is still valid
+	boolean isGameValid() { return cardsPlayed.size() < 52; }
+
 }
