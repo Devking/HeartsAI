@@ -250,7 +250,7 @@ class Game {
 
 				while (!validPlay) {
 					// Allow the Player to pick a move to play next
-					playedCard = playerOrder.get(index).performAction( new ArrayList<Card>(currentRound) );
+					playedCard = playerOrder.get(index).performAction(gameCopy);
 					// Check if the playedCard is valid, given this currentRound
 					validPlay = checkRound(playedCard, index);
 					// If the card was not valid, put it back in the hand and sort the hand (this might be SLOW)

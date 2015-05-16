@@ -73,6 +73,7 @@ abstract class Player {
 	}
 
 	// Given any sort of player, make a decision to play a card
-	abstract Card performAction (ArrayList<Card> currentRound);
+	// Pass in a copy of the game state for full playout functionality
+	abstract Card performAction (State gameCopy);
 
 }

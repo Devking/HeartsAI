@@ -29,6 +29,7 @@
 0.3.0 &mdash; Working Low-Play AI has been completed  
 0.4.0 &mdash; Added score-tracking statistics  
 0.5.0 &mdash; Shooting the moon is implemented -- minor bug fixes as well  
+0.6.0 &mdash; Added a copy constructor for the Deck and began working on the State class
 
 ### Things To Do
 

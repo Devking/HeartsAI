@@ -11,7 +11,7 @@ class HumanPlayer extends Player {
 		System.out.println("Human player ("+name+") initialized."); 
 	}
 
-	Card performAction (ArrayList<Card> currentRound) {
+	Card performAction (State gameCopy) {
 		boolean flag = true;
 		int i = 0;
 		// run a while loop to make sure the user keeps inputting until valid input
