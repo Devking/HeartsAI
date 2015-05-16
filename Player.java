@@ -4,32 +4,43 @@ import java.util.ArrayList;
 import java.util.*;
 
 abstract class Player {
+
 	String name;
 	int points;
 	ArrayList<Card> hand = new ArrayList<Card>();
 
-	Player (String id) { name = id; points = 0;}
+	Player (String id) { name = id; points = 0; }
 
-	// for drawing cards from the deck
+	// use this class to keep track of suit ranges
+	// [startIndex, endIndex) or startIndex = -1 if no suit
+	class SuitRange {
+		int startIndex;
+		int endIndex;
+		SuitRange() { startIndex = -1; endIndex = -1; }
+		// Returns how many cards of that suit exist
+		int getRange() { return endIndex-startIndex; }
+	}
+
+	/******************************************************************************
+	/ Hand-related Methods
+	/******************************************************************************/
+
+	// Draw cards from the deck
 	void addToHand (Card newCard) { hand.add(newCard); }
-
-	// Add points to this player
-	void addPoints (int pnts) { points += pnts; }
 
 	// Sorts the hand by suit (used once at the start of every game)
 	void sortHand () { Collections.sort(hand); }
 
-	// Return the name of the player
-	String getName () { return name; }
-
-	// Return the amount of points this player has
-	int getPoints () { return points; }
-
 	// Clear the cards in the hand (just to make sure the game is initialized properly)
 	void clearHand () { hand.clear(); }
 
-	// Clear the cards in the hand and clear all points
-	void clearPlayer() { clearHand(); points = 0; }
+	// Given a suit, check if the hand has that suit
+	boolean checkSuit(Suit check) {
+		boolean flag = false;
+		if (check == null) return false;
+		for (Card c: hand) { if (c.getSuit() == check) flag = true; }
+		return flag;
+	}
 
 	// Used for the beginning of the game, to see who goes first
 	boolean hasTwoOfClubs () { 
@@ -45,11 +56,22 @@ abstract class Player {
 		return flag;
 	}
 
-	// given a suit, check if the hand has that suit
-	boolean checkSuit(Suit check) {
-		boolean flag = false;
-		for (Card c: hand) { if (c.getSuit() == check) flag = true; }
-		return flag;
+	// Get the first suit that was played this round
+	Suit getFirstSuit(ArrayList<Card> currentRound) {
+		if (currentRound.size() == 0) return null;
+		return currentRound.get(0).getSuit();
+	}
+
+	// Given a suit, check the range of indices where that suit exists
+	SuitRange getSuitRange(Suit check) {
+		SuitRange range = new SuitRange();
+		if (check == null) return range;
+		for (int i = 0; i < hand.size(); i++) { 
+			if (range.startIndex == -1 && hand.get(i).getSuit() == check) range.startIndex = i;
+			if (range.startIndex != -1 && hand.get(i).getSuit() != check) { range.endIndex = i; break; }
+		}
+		if (range.startIndex != -1 && range.endIndex == -1) range.endIndex = hand.size();
+		return range;
 	}
 
 	// prints the hand that the player currently has
@@ -66,11 +88,25 @@ abstract class Player {
 		System.out.println("");
 	}
 
-	// Get the first suit that was played this round
-	Suit getFirstSuit(ArrayList<Card> currentRound) {
-		if (currentRound.size() == 0) return null;
-		return currentRound.get(0).getSuit();
-	}
+	/******************************************************************************
+	/ Points and Name Methods
+	/******************************************************************************/
+
+	// Return the name of the player
+	String getName () { return name; }
+
+	// Add points to this player
+	void addPoints (int pnts) { points += pnts; }
+
+	// Return the amount of points this player has
+	int getPoints () { return points; }
+
+	// Clear the cards in the hand and clear all points
+	void clearPlayer() { clearHand(); points = 0; }
+
+	/******************************************************************************
+	/ Methods to be implemented by children
+	/******************************************************************************/
 
 	// Given any sort of player, make a decision to play a card
 	// Pass in a copy of the game state for full playout functionality

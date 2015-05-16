@@ -13,7 +13,11 @@ class HumanPlayer extends Player {
 
 	Card performAction (State gameCopy) {
 
-		System.out.println("DEBUG: THIS IS ROUND #"+gameCopy.getRoundNumber()+"!");
+
+		Suit firstSuit = getFirstSuit(gameCopy.currentRound);
+		SuitRange range = getSuitRange(firstSuit);
+		System.out.println("There are " + range.getRange() + " " + firstSuit + " cards.");
+
 
 		boolean flag = true;
 		int i = 0;

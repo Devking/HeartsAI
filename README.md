@@ -31,6 +31,8 @@
 0.5.0 &mdash; Shooting the moon is implemented -- minor bug fixes as well  
 0.6.0 &mdash; Added a copy constructor for the Deck and began working on the State class  
 0.6.1 &mdash; All Players now take parameters of the `State` class, State constructor now finished  
+0.6.2 &mdash; Added functionality to return the range of cards in any given suit  
+
 
 ### Things To Do
 

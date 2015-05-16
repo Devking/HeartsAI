@@ -19,6 +19,8 @@ class LowPlayAI extends Player {
 		// If no cards were played this round, just play the smallest card in the hand
 		if (firstSuit == null) return hand.remove(0);
 
+		
+
 		// Remove the smallest card of the correct suit
 		for (int i = 0; i < hand.size(); i++)
 			if (hand.get(i).getSuit() == firstSuit) return hand.remove(i);
