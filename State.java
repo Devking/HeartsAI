@@ -17,7 +17,7 @@ class State {
 
 	// Remember to make COPIES of what is passed in!
 	State (Deck deck, ArrayList<Card> round, ArrayList<Integer> scores) {
-		//cardsPlayed = 
+		cardsPlayed = new Deck (deck);
 		currentRound = new ArrayList<Card>(round);
 		playerScores = new ArrayList<Integer>(scores);
 	}

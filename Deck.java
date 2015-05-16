@@ -14,6 +14,12 @@ public class Deck {
 	// constructor for a deck: initialize the 52 cards and shuffle the deck
 	Deck () { initCounter = true; initDeck(); shuffleDeck(); }
 
+	// copy constructor for a deck
+	Deck (Deck toCopy) {
+		this.initCounter = toCopy.initCounter;
+		this.allCards = new ArrayList<Card>(toCopy.allCards);
+	}
+
 	// generate deck for the first time; can only be used once; should never be called outside constructor
 	void initDeck () {
 		if (initCounter) {
