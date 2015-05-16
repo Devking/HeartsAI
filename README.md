@@ -12,6 +12,14 @@
 - Game class (plays one game)  
 - Hearts class (this is the main file that brings it all together)  
 
+## Implemented Players
+
+- HumanPlayer: Allows humans to play Hearts  
+- LowPlayAI: Picks the lowest card in a valid suit  
+- RandomPlayAI: Plays a random card in a valid suit  
+- LookAheadPlayer: Looks ahead a minimal amount of steps to make a decision  
+- MCTSPlayer: Uses MCTS to decide on the optimal next move  
+
 ## Version History
 
 0.0.1 &mdash;  Setting all of the infrastructure up and testing some java things  
