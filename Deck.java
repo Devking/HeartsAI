@@ -56,6 +56,9 @@ public class Deck {
 		return null;
 	}
 
+	// Return the number of cards in the Deck
+	int size() { return allCards.size(); }
+
 	// return a card to the deck
 	// be careful with pointer issues
 	void restockDeck(Card returned) { allCards.add(returned); }

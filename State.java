@@ -28,5 +28,9 @@ class State {
 		deck.printDeck();
 		*/
 	}
+
+	// Figure out what round it is, based on number of cards in the Deck
+	// Note: We start counting from Round 1
+	int getRoundNumber() { return cardsPlayed.size()/4 + 1; }
 	
 }

@@ -12,6 +12,9 @@ class HumanPlayer extends Player {
 	}
 
 	Card performAction (State gameCopy) {
+
+		System.out.println("DEBUG: THIS IS ROUND #"+gameCopy.getRoundNumber()+"!");
+
 		boolean flag = true;
 		int i = 0;
 		// run a while loop to make sure the user keeps inputting until valid input
