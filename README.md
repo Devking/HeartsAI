@@ -43,5 +43,5 @@
 ## Version Goals
 
 1.0.0 &mdash; First full working game version (with all human players)  
-1.2.0 &mdash; Full working game with basic Look-ahead FSM AI
-1.3.0 &mdash; Full working game with basic MCTS AI
+1.2.0 &mdash; Full working game with basic Look-ahead FSM AI  
+1.3.0 &mdash; Full working game with basic MCTS AI  
