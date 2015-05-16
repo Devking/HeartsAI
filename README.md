@@ -8,7 +8,6 @@
 - Hand class (for each of the hands)  
 - Game class (plays one game)  
 - Player abstract class (defines base functionality for any player)  
-
 - HumanPlayer class extends Player (`performAction()` allows human input)  
 - Hearts class (this is the main file that brings it all together)  
 
@@ -34,11 +33,11 @@
 ### Things To Do
 
 - Finish state representations to be passed in to `performAction()`  
-- Get working FSM AI  
+- Get working Look-Ahead FSM AI  
 - Get working MCTS AI  
 
 ## Version Goals
 
 1.0.0 &mdash; first full working game version (with all human players)  
-1.2.0 &mdash; full working game with basic FSM AI
+1.2.0 &mdash; full working game with basic Look-ahead FSM AI
 1.3.0 &mdash; full working game with basic MCTS AI

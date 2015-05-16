@@ -3,15 +3,15 @@ import java.util.Scanner;
 
 class Game {
 
-	ArrayList<Player> playerOrder;			// think of this as a circular queue of the 4 players
-	int firstPlayer;						// the index of the first player for this round
-	Deck cardsPlayed;						// cards that have already been played -- replace them into the deck
-	ArrayList<Card> currentRound;   		// cards currently played on the table
-	boolean twoClubsPlayed; 				// a flag to check if the two of clubs has been played or not
-	boolean hasHeartsBroken;				// a flag to check if hearts has been broken
-	ArrayList<Integer> playerScores; 		// keep track of the player scores within this game
-	Scanner in;								// For scanner input
-	String s;								// To store scanner input
+	ArrayList<Player> 	playerOrder;			// think of this as a circular queue of the 4 players
+	int 				firstPlayer;			// the index of the first player for this round
+	Deck 				cardsPlayed;			// cards that have already been played -- replace them into the deck
+	ArrayList<Card> 	currentRound;   		// cards currently played on the table
+	boolean 			twoClubsPlayed; 		// a flag to check if the two of clubs has been played or not
+	boolean 			hasHeartsBroken;		// a flag to check if hearts has been broken
+	ArrayList<Integer> 	playerScores; 			// keep track of the player scores within this game
+	Scanner 			in;						// For scanner input
+	String 				s;						// To store scanner input
 
 	// Every game must have four players and one deck!
 	// Note: This WILL NOT shuffle the deck or deal the cards here
@@ -242,19 +242,18 @@ class Game {
 				if (j == 0) checkHeartsOnly(index);		// if this is the first player this round, check if only hearts
 				boolean validPlay = false;
 				Card playedCard = null;
+
+				// Create a copy of the current game state, to be passed in to the Player
+				// So that the Player may potentially do playouts of the game
+				// Note that these three parameters are copied in the State constructor
+				State gameCopy = new State(cardsPlayed, currentRound, playerScores);
+
 				while (!validPlay) {
-
-					// ideally, we should pass in (a) cardsPlayed, (b) currentRound, (c) scores
-					// we should not be passing in the hands of other players (hidden information)
-					// each player will already know what cards they have
-
-					// be sure to pass in copies, so that the player can't modify the game state
+					// Allow the Player to pick a move to play next
 					playedCard = playerOrder.get(index).performAction( new ArrayList<Card>(currentRound) );
-
-					// we need to check if the playedCard is valid, given this currentRound
-					// if it is not valid, we need to loop over it again and get the player to pick another card
+					// Check if the playedCard is valid, given this currentRound
 					validPlay = checkRound(playedCard, index);
-					// if the card was not valid, put it back in the hand and sort the hand (this might be SLOW)
+					// If the card was not valid, put it back in the hand and sort the hand (this might be SLOW)
 					if (!validPlay) {
 						System.out.println("This was an invalid play. Please pick a valid card.");
 						playerOrder.get(index).addToHand(playedCard);
