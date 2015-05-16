@@ -6,9 +6,10 @@
 - Card class (for each individual card)  
 - Deck class (for the "deck" to deal hands)  
 - Hand class (for each of the hands)  
-- Game class (plays one game)  
 - Player abstract class (defines base functionality for any player)  
 - HumanPlayer class extends Player (`performAction()` allows human input)  
+- State class (track state of the game and allow for random playouts)  
+- Game class (plays one game)  
 - Hearts class (this is the main file that brings it all together)  
 
 ## Version History
