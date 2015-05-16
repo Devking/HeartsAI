@@ -248,6 +248,7 @@ class Game {
 				// Note that these three parameters are copied in the State constructor
 				State gameCopy = new State(cardsPlayed, currentRound, playerScores);
 
+				// Loop: Allow player to pick a play, but reject if invalid selection
 				while (!validPlay) {
 					// Allow the Player to pick a move to play next
 					playedCard = playerOrder.get(index).performAction(gameCopy);
@@ -261,16 +262,14 @@ class Game {
 					}
 				}
 
+				// Standard output message to notify what card was officially played
 				System.out.println(playerOrder.get(index).getName() + " played " + playedCard.printCard() + ".");
-				// we *could* printHand() here, but it's better to have each player do that
-				// based on whether or not that player specifically needs to print hand or not
-
-				// add the played card to the currentRound (put the card on the table for all to see)
+				// Add the played card to the currentRound (put the card on the table for all to see)
 				// BE CAREFUL! We will be adding a direct pointer to the card here!
 				currentRound.add(playedCard);
-				// this will take the card that is played and add it back to the deck
-				cardsPlayed.restockDeck( playedCard );
-				// flush the screen (this is just for convenience for human players)
+				// Take the card that is played and add it back to the deck as well
+				cardsPlayed.restockDeck(playedCard);
+				// Flush the screen (this is just for convenience for human players)
 				final String ANSI_CLS = "\u001b[2J";
         		final String ANSI_HOME = "\u001b[H";
         		System.out.println();
@@ -283,7 +282,7 @@ class Game {
 			System.out.println("--------------------------------------------");
 			System.out.println("Round " + i + " Summary:");
 			System.out.println("--------------------------------------------");
-			 printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
+			printRound(firstPlayer); 	// for debugging: use this method to see what cards were played this round
 
 			// 1. findTaker() will update who took the cards this round
 			// 2. calculatePoints() will calculate how many points this round consisted of
@@ -297,11 +296,8 @@ class Game {
 			printPoints();
 
 			// FOR HUMAN PLAYERS ONLY: Get round statistics and then flush
-			// How to turn this on if it's a human player -- we should set some flags
-		      
-			//Console console = System.console();
-			//if (i < 13) console.readLine("Press ENTER to continue to the next round.\n");
-			//else console.readLine("PRESS ENTER TO END THIS GAME.\n");
+			// How to turn this on *only* if it's a human player -- we should set some flags
+		
 			if (i < 13) System.out.println("Press ENTER to continue to the next round.");
 			else System.out.println("PRESS ENTER TO END THIS GAME.");
 		    s = in.nextLine();
@@ -313,7 +309,7 @@ class Game {
         	System.out.flush();
 		}
 
-		// add function to deal with someone who shot the moon this game
+		// Check if someone shot the moon
 		shotTheMoon();
 		System.out.println("------------------------------------------");
 		System.out.println("Game Summary:");
