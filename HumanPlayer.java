@@ -13,12 +13,6 @@ class HumanPlayer extends Player {
 
 	Card performAction (State gameCopy) {
 
-
-		Suit firstSuit = getFirstSuit(gameCopy.currentRound);
-		SuitRange range = getSuitRange(firstSuit);
-		System.out.println("There are " + range.getRange() + " " + firstSuit + " cards.");
-
-
 		boolean flag = true;
 		int i = 0;
 		// run a while loop to make sure the user keeps inputting until valid input
