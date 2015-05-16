@@ -20,13 +20,6 @@ class State {
 		cardsPlayed = new Deck (deck);
 		currentRound = new ArrayList<Card>(round);
 		playerScores = new ArrayList<Integer>(scores);
-
-		/* // This is a debugging sanity check to see that the copy constructor for the Deck works
-		cardsPlayed.printDeck();
-		cardsPlayed.drawTop();
-		cardsPlayed.printDeck();
-		deck.printDeck();
-		*/
 	}
 
 	// Figure out what round it is, based on number of cards in the Deck
