@@ -22,7 +22,7 @@ class LookAheadPlayer extends Player {
 		rng = new Random();
 	}
 
-	boolean setDebug() { return true; }
+	boolean setDebug() { return false; }
 
 	// Used to check if all the cards in this hand is hearts
 	boolean hasAllHearts(ArrayList<Card> hand) {
@@ -35,15 +35,15 @@ class LookAheadPlayer extends Player {
 	int playoutGame(State gameCopy, ArrayList<Card> gameHand) {
 		int totalpoints = 0;
 		while (gameCopy.isGameValid()) {
-			System.out.println("Playout!");
+			//System.out.println("Playout!");
 			Suit firstSuit = getFirstSuit(gameCopy.currentRound);
 			SuitRange range = getSuitRange(firstSuit, gameHand);
 			if (range.getRange() == 0) {
 				// Deal with playing hearts
-				System.out.println(gameHand.size());
+				//System.out.println(gameHand.size());
 				int index = rng.nextInt(gameHand.size());
 				while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand.get(index).getSuit() == Suit.HEARTS && !hasAllHearts(gameHand)) {
-					System.out.println("BAD: " + index);
+					//System.out.println("BAD: " + index);
 					index = rng.nextInt(gameHand.size());
 				}
 				totalpoints += gameCopy.advance(gameHand.remove(index), gameHand);
@@ -59,7 +59,7 @@ class LookAheadPlayer extends Player {
 
 		playoutHand.clear();
 		for (Card c : hand) playoutHand.add(c.copy());
-		System.out.println("PlayoutHand Size: " + playoutHand.size());
+		//System.out.println("PlayoutHand Size: " + playoutHand.size());
 
 		// If this is the first move, then we must play the two of spades regardless
 		if (masterCopy.firstMove())
@@ -79,7 +79,7 @@ class LookAheadPlayer extends Player {
 		if (range.startIndex != -1) bestIndex = range.startIndex;
 		int lowestScore = 100;
 
-		System.out.println("Test for " + range.getRange() + " possibilites.");
+		//System.out.println("Test for " + range.getRange() + " possibilites.");
 
 		// If we don't have a card in that suit, or we are starting the round
 		// Then we are allowed to play any card in our hand (check hasHeartsBroken)
@@ -110,7 +110,7 @@ class LookAheadPlayer extends Player {
 		// This case occurs only if we have a limited scope of cards to pick from
 		for (int i = range.startIndex; i < range.endIndex; i++) {
 			ArrayList<Card> gameHand = new ArrayList<Card>(playoutHand);
-			System.out.println("Game Hand Size:" + gameHand.size());
+			//System.out.println("Game Hand Size:" + gameHand.size());
 			if (masterCopy.firstInRound() && !masterCopy.hasHeartsBroken && gameHand.get(i).getSuit() == Suit.HEARTS) break;
 			State gameCopy = new State(masterCopy);
 			int score = gameCopy.advance(gameHand.remove(i), gameHand);

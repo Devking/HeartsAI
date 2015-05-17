@@ -194,6 +194,10 @@ class State {
 		int taker = findTaker(firstPlayer);
 		playerScores.set(taker, playerScores.get(taker)+points);
 
+		// Check what points to return from this function
+		int returnpoints = 0;
+		if (taker == playerIndex) returnpoints = points;
+
 		// Clear the cards on the table (don't worry, pointers to them are tracked in the cardsPlayed deck)
 		currentRound.clear();
 
@@ -214,7 +218,7 @@ class State {
 		}
 
 		// Return the amount of points that the player has received
-		return 0;
+		return returnpoints;
 	}
 
 }

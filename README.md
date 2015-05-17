@@ -54,11 +54,11 @@
 0.9.1 &mdash;  Fixed shallow copy issues with Decks and hands  
 0.9.2 &mdash;  Playthroughs with state and lookahead player both work! Fixed minor issues  
 1.0.0 &mdash;  Full working game, with working State class, game playthroughs, and LookAhead AI  
+1.0.1 &mdash;  Finished skeleton of MCTS Player  
+1.0.2 &mdash;  Fixed bug with `advance()` method in the State class with returning accrued points  
 
-### Things To Do
+### Future Work
 
-1. Get working MCTS AI  
-
-## Version Goals
-
-1.1.0 &mdash; Full working game with basic MCTS AI  
+1. Add working MCTS AI  
+2. Decouple Hand and Player operations by creating a new Hand class  
+3. Fix how cards are removed from the hand/selected by Players  
