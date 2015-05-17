@@ -65,6 +65,12 @@ class State {
 	// Return this player's score
 	int getScore() { return playerScores.get(playerIndex); }
 
+	// Check if that randomly played card is actually in my hand
+	boolean isInMyHand(Card c, ArrayList<Card> playoutHand) {
+		for (Card d : playoutHand) if (c.equals(d)) return true;
+		return false;
+	}
+
 	// Given some Card c, find a matching card using "equals"
 	// And move it from cardsPlayed.invertDeck to cardsPlayed.allCards
 	// This may take some time
@@ -118,6 +124,32 @@ class State {
 		return points;
 	}
 
+
+	// Return the index of the next player who will play // the player who takes this round
+	// Pass in the index of the current first player (to check who played what card)
+	// NOTE: This MUST return an int from 0 to 3! ALWAYS DO % playerOrder.size();
+	int findTaker (int firstPlayer) {
+		Suit firstSuit = currentRound.get(0).getSuit();
+		Value largestValue = currentRound.get(0).getValue();
+		int taker = firstPlayer;
+
+		// go through all 4 cards that were played this round
+		for (int i = 0; i < playerScores.size(); i++) {
+			// keep track of the index of who played it
+			int index = (firstPlayer+i) % playerScores.size();
+			// if this card is the same suit as the first card, proceed
+			if (currentRound.get(i).getSuit() == firstSuit) {
+				// if this card is the largest played of the right suit this round, this player takes the round
+				if (largestValue.compareTo(currentRound.get(i).getValue()) < 0) {
+					taker = index;
+					largestValue = currentRound.get(i).getValue();
+				}
+			}
+		}
+
+		return taker % playerScores.size();
+	}
+
 	// Return -1 if a card that cannot be played is played
 	// On the controller side: first save the pointer to the card, then remove from the hand
 	// then check advance(), then if necessary, add card back to hand
@@ -139,21 +171,38 @@ class State {
 
 			// Pick a random number that represents an index of the cards in the invertedDeck (cards yet to be played)
 			int index = rng.nextInt(cardsPlayed.invertDeck.size());
+			// Takes time equivalent to hand size!
+			while (isInMyHand(cardsPlayed.invertDeck.get(index), playoutHand)) {
+				index = rng.nextInt(cardsPlayed.invertDeck.size());
+			}
 			// Use the play card method to put take the card out of the invert deck, into the played deck, and also onto the table
 			playCard(cardsPlayed.invertDeck.get(index));
 
 		}
 
 		// Round has ended -- check what points have gone where and determine who goes next (use playerScores)
+		int firstPlayer = (playerIndex - playTurn + playerScores.size()) % playerScores.size();
 		int points = calculatePoints();
-
+		int taker = findTaker(firstPlayer);
+		playerScores.set(taker, playerScores.get(taker)+points);
 
 		// Clear the cards on the table (don't worry, pointers to them are tracked in the cardsPlayed deck)
 		currentRound.clear();
 
 		// If the game still has more rounds to play, begin the next round just enough for the AI to make another move
 		if (isGameValid()) {
-
+			// repeat until taker = playerIndex
+			while (taker != playerIndex) {
+				// Pick a random number that represents an index of the cards in the invertedDeck (cards yet to be played)
+				int index = rng.nextInt(cardsPlayed.invertDeck.size());
+				// Takes time equivalent to hand size!
+				while (isInMyHand(cardsPlayed.invertDeck.get(index), playoutHand)) {
+					index = rng.nextInt(cardsPlayed.invertDeck.size());
+				}
+				// Use the play card method to put take the card out of the invert deck, into the played deck, and also onto the table
+				playCard(cardsPlayed.invertDeck.get(index));
+				taker = (taker+1) % playerScores.size();
+			}
 		}
 
 		// Return the amount of points that the player has received
