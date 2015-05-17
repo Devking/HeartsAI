@@ -56,4 +56,7 @@ class Card implements Comparable<Card> {
 		return suit.equals(other.getSuit()) && value.equals(other.getValue());
 	}
 
+	// Allow a copy function for cards
+	Card copy() { return new Card(suit, value); } 
+
 }

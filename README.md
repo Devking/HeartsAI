@@ -50,6 +50,9 @@
 0.8.0 &mdash;  Finished preliminary version of `advance()` in the State class  
 0.8.1 &mdash;  Added functionality for displaying debug messages only for Human players  
 0.8.2 &mdash;  Fixed printout issue with shooting the moon -- random AI able to shoot the moon!  
+0.9.0 &mdash;  LookAheadPlayer has `performAction()` implemented (but not `playoutGame()`)  
+0.9.1 &mdash;  Fixed shallow copy issues with Decks and hands  
+0.9.2 &mdash;  Playthroughs with state and lookahead player both work! Fixed minor issues  
 
 ### Things To Do
 

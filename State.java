@@ -166,7 +166,7 @@ class State {
 
 		// While the round is still valid, do *random* playouts to finish the round
 		// Notice: playouts do not have to be valid, since we do not have information on what cards
-		// other players may be holding
+		// other players may be holding -- is this a good representation of hidden information, or not?
 		while (validRound()) {
 
 			// Pick a random number that represents an index of the cards in the invertedDeck (cards yet to be played)

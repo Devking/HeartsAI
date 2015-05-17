@@ -247,7 +247,8 @@ class Game {
 			for (int j = 0; j < 4; j++) {
 				// use index to determine the index of the player currently playing
 				int index = (j+firstPlayer) % playerOrder.size();
-				printRound(firstPlayer); // for debugging: print the cards that were played this round
+				if (debug)
+					printRound(firstPlayer); // for debugging: print the cards that were played this round
 				if (j == 0) checkHeartsOnly(index);		// if this is the first player this round, check if only hearts
 				boolean validPlay = false;
 				Card playedCard = null;

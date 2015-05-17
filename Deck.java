@@ -20,9 +20,12 @@ public class Deck {
 
 	// copy constructor for a deck
 	Deck (Deck toCopy) {
-		this.initCounter = toCopy.initCounter;
-		this.allCards = new ArrayList<Card>(toCopy.allCards);
-		this.invertDeck = new ArrayList<Card>(toCopy.invertDeck);
+		initCounter = toCopy.initCounter;
+		allCards 	= new ArrayList<Card>(toCopy.allCards);
+		invertDeck 	= new ArrayList<Card>(toCopy.invertDeck);
+		// For debugging, to check the new Decks have the right size
+		//int number = allCards.size()+invertDeck.size();
+		//System.out.println("New Deck has cards: " + number + "(" + allCards.size() + ") (" + invertDeck.size() + ")");
 	}
 
 	// generate deck for the first time; can only be used once; should never be called outside constructor

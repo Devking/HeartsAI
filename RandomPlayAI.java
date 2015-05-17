@@ -16,6 +16,9 @@ class RandomPlayAI extends Player {
 	// NOTE: performAction() must REMOVE the card from the hand
 	// we would not want this to be the case in the future
 	Card performAction (State masterCopy) {
+		// If this is the first move, then we must play the two of spades regardless
+		if (masterCopy.firstMove())
+			return hand.remove(0);
 		// For human debugging: print the hand
 		printHand();
 		// Get the first suit that was played this round
