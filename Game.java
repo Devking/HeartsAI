@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 class Game {
 
-	boolean 			debug = false;			// set to true for debug printouts or if human player
-
+	boolean 			debug;					// set to true for debug if some player wishes for it
 	ArrayList<Player> 	playerOrder;			// think of this as a circular queue of the 4 players
 	int 				firstPlayer;			// the index of the first player for this round
 	Deck 				cardsPlayed;			// cards that have already been played -- replace them into the deck
@@ -19,11 +18,13 @@ class Game {
 	// Note: This WILL NOT shuffle the deck or deal the cards here
 	// We ONLY do that upon playing a new game
 	Game (Deck deck, Player p1, Player p2, Player p3, Player p4) {
+		debug = false;
 		playerOrder = new ArrayList<Player>();
 		playerOrder.add(p1);
 		playerOrder.add(p2);
 		playerOrder.add(p3);
 		playerOrder.add(p4);
+		for (Player p : playerOrder) if (p.setDebug()) debug = true;
 		firstPlayer = 0;
 		cardsPlayed = deck;
 		currentRound = new ArrayList<Card>();
@@ -216,9 +217,15 @@ class Game {
 		// Old Moon: Player does not gain points this round, all others gain 26 points
 		if (index > -1) {
 			for (int i = 0; i < playerOrder.size(); i++) {
-				if (i != index) playerOrder.get(i).addPoints(26);
+				if (i != index) {
+					playerOrder.get(i).addPoints(26);
+					playerScores.set(i, 26);
+				}
 				// Remove the 26 points that this player received this round
-				else playerOrder.get(i).addPoints(-26);
+				else {
+					playerOrder.get(i).addPoints(-26);
+					playerScores.set(i,0);
+				}
 			}
 			if (playerOrder.get(index).getPoints() < 0)
 				playerOrder.get(index).clearPlayer();

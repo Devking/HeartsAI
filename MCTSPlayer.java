@@ -18,6 +18,8 @@ class MCTSPlayer extends Player {
 		rng = new Random();
 	}
 
+	boolean setDebug() { return false; }
+
 	// NOTE: performAction() must REMOVE the card from the hand
 	// we would not want this to be the case in the future
 

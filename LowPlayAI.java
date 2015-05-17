@@ -9,6 +9,8 @@ class LowPlayAI extends Player {
 	
 	LowPlayAI(String name) { super(name); System.out.println("Low Play AI ("+name+") initialized.");  }
 
+	boolean setDebug() { return false; }
+
 	// NOTE: performAction() must REMOVE the card from the hand
 	// we would not want this to be the case in the future
 	Card performAction (State masterCopy) {

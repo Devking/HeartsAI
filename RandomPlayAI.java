@@ -11,6 +11,8 @@ class RandomPlayAI extends Player {
 	
 	RandomPlayAI(String name) { super(name); rng = new Random(); System.out.println("Random Play AI ("+name+") initialized.");  }
 
+	boolean setDebug() { return false; }
+
 	// NOTE: performAction() must REMOVE the card from the hand
 	// we would not want this to be the case in the future
 	Card performAction (State masterCopy) {

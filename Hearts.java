@@ -7,10 +7,10 @@ public class Hearts {
 		Deck thing = new Deck();
 
 		// Assume this order is clockwise
-		Player p1 = new LookAheadPlayer("Wells");
+		Player p1 = new LowPlayAI("Wells");
 		// Player p1 = new HumanPlayer("Wells");
 		Player p2 = new RandomPlayAI("Jai");
-		Player p3 = new LowPlayAI("Ant");
+		Player p3 = new LookAheadPlayer("Ant");
 		Player p4 = new MCTSPlayer("Julian");
 
 		// at the end of every game, we will have all the cards back in the deck
