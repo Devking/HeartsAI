@@ -11,6 +11,10 @@ public class Deck {
 	// these are all of the cards currently in the deck
 	ArrayList<Card> allCards = new ArrayList<Card>();
 
+	// these are all of the cards not in the deck (during gameplay)
+	// keeps pointers to those cards, so be careful
+	ArrayList<Card> invertDeck = new ArrayList<Card>();
+
 	// constructor for a deck: initialize the 52 cards and shuffle the deck
 	Deck () { initCounter = true; initDeck(); shuffleDeck(); }
 
@@ -49,9 +53,11 @@ public class Deck {
 
 	// remove and return the top card, to place it in a hand (used in dealing, which is in Game)
 	Card drawTop() { 
-		if (allCards.size() != 0) 
+		if (allCards.size() != 0) {
+			// as you deal from the deck, add a pointer to the invertDeck
+			invertDeck.add(allCards.get(allCards.size()-1));
 			return allCards.remove(allCards.size() - 1); 
-		else
+		} else
 			System.out.println("Error! The Deck is empty; cannot draw from it!");
 		return null;
 	}
@@ -61,7 +67,7 @@ public class Deck {
 
 	// return a card to the deck
 	// be careful with pointer issues
-	void restockDeck(Card returned) { allCards.add(returned); }
+	void restockDeck(Card returned) { allCards.add(returned); invertDeck.remove(returned); }
 
 	// check that we have all 52 unique cards
 	// checkDeck() {}
