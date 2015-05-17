@@ -53,15 +53,12 @@
 0.9.0 &mdash;  LookAheadPlayer has `performAction()` implemented (but not `playoutGame()`)  
 0.9.1 &mdash;  Fixed shallow copy issues with Decks and hands  
 0.9.2 &mdash;  Playthroughs with state and lookahead player both work! Fixed minor issues  
+1.0.0 &mdash;  Full working game, with working State class, game playthroughs, and LookAhead AI  
 
 ### Things To Do
 
-1. Finish state representations to be passed in to `performAction()`  
-2. Get working Look-Ahead FSM AI  
-3. Get working MCTS AI  
+1. Get working MCTS AI  
 
 ## Version Goals
 
-1.0.0 &mdash; First full working game version (with all human players)  
-1.2.0 &mdash; Full working game with basic Look-ahead FSM AI  
-1.3.0 &mdash; Full working game with basic MCTS AI  
+1.1.0 &mdash; Full working game with basic MCTS AI  

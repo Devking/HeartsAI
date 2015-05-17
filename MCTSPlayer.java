@@ -52,7 +52,7 @@ class MCTSPlayer extends Player {
 		}
 
 		// Remove a random card of the correct suit
-		SuitRange range = getSuitRange(firstSuit);
+		SuitRange range = getSuitRange(firstSuit, hand);
 		if (range.getRange() == 0) return hand.remove(rng.nextInt(hand.size()));
 		int index = rng.nextInt(range.getRange());
 		return hand.remove(range.startIndex+index);

@@ -24,9 +24,34 @@ class LookAheadPlayer extends Player {
 
 	boolean setDebug() { return true; }
 
+	// Used to check if all the cards in this hand is hearts
+	boolean hasAllHearts(ArrayList<Card> hand) {
+		boolean flag = true;
+		for (Card c : hand) { if (c.getSuit() != Suit.HEARTS) flag = false; }
+		return flag;
+	}
+
 	// For random playout of the game to the end
 	int playoutGame(State gameCopy, ArrayList<Card> gameHand) {
 		int totalpoints = 0;
+		while (gameCopy.isGameValid()) {
+			System.out.println("Playout!");
+			Suit firstSuit = getFirstSuit(gameCopy.currentRound);
+			SuitRange range = getSuitRange(firstSuit, gameHand);
+			if (range.getRange() == 0) {
+				// Deal with playing hearts
+				System.out.println(gameHand.size());
+				int index = rng.nextInt(gameHand.size());
+				while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand.get(index).getSuit() == Suit.HEARTS && !hasAllHearts(gameHand)) {
+					System.out.println("BAD: " + index);
+					index = rng.nextInt(gameHand.size());
+				}
+				totalpoints += gameCopy.advance(gameHand.remove(index), gameHand);
+			} else {
+				int index = rng.nextInt(range.getRange());
+				totalpoints += gameCopy.advance(gameHand.remove(range.startIndex+index), gameHand);
+			}
+		}
 		return totalpoints;
 	}
 
@@ -47,12 +72,14 @@ class LookAheadPlayer extends Player {
 		Suit firstSuit = getFirstSuit(masterCopy.currentRound);
 
 		// Get range of possible choices for the correct suit
-		SuitRange range = getSuitRange(firstSuit);
+		SuitRange range = getSuitRange(firstSuit, hand);
 
 		// Track what the best card index to play is, and what score it ended with
 		int bestIndex = 0;
 		if (range.startIndex != -1) bestIndex = range.startIndex;
 		int lowestScore = 100;
+
+		System.out.println("Test for " + range.getRange() + " possibilites.");
 
 		// If we don't have a card in that suit, or we are starting the round
 		// Then we are allowed to play any card in our hand (check hasHeartsBroken)

@@ -63,14 +63,14 @@ abstract class Player {
 	}
 
 	// Given a suit, check the range of indices where that suit exists
-	SuitRange getSuitRange(Suit check) {
+	SuitRange getSuitRange(Suit check, ArrayList<Card> currentHand) {
 		SuitRange range = new SuitRange();
 		if (check == null) return range;
-		for (int i = 0; i < hand.size(); i++) { 
-			if (range.startIndex == -1 && hand.get(i).getSuit() == check) range.startIndex = i;
-			if (range.startIndex != -1 && hand.get(i).getSuit() != check) { range.endIndex = i; break; }
+		for (int i = 0; i < currentHand.size(); i++) { 
+			if (range.startIndex == -1 && currentHand.get(i).getSuit() == check) range.startIndex = i;
+			if (range.startIndex != -1 && currentHand.get(i).getSuit() != check) { range.endIndex = i; break; }
 		}
-		if (range.startIndex != -1 && range.endIndex == -1) range.endIndex = hand.size();
+		if (range.startIndex != -1 && range.endIndex == -1) range.endIndex = currentHand.size();
 		return range;
 	}
 
