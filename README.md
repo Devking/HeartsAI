@@ -37,7 +37,7 @@
 0.2.0 &mdash;  Game now passes in `currentRound` to `performAction()`  
 0.3.0 &mdash;  Working **Low-Play AI** has been completed  
 0.4.0 &mdash;  Added score-tracking statistics  
-0.5.0 &mdash;  Shooting the moon is implemented -- minor bug fixes as well  
+0.5.0 &mdash;  Shooting the moon is implemented &mdash; minor bug fixes as well  
 0.6.0 &mdash;  Added a copy constructor for the Deck and began working on the State class  
 0.6.1 &mdash;  All Players now take parameters of the `State` class, State constructor now finished  
 0.6.2 &mdash;  Added functionality to return the range of cards in any given suit  
@@ -49,16 +49,21 @@
 0.7.2 &mdash;  Design paradigm for multiple game playouts has been established  
 0.8.0 &mdash;  Finished preliminary version of `advance()` in the State class  
 0.8.1 &mdash;  Added functionality for displaying debug messages only for Human players  
-0.8.2 &mdash;  Fixed printout issue with shooting the moon -- random AI able to shoot the moon!  
+0.8.2 &mdash;  Fixed printout issue with shooting the moon &mdash; random AI able to shoot the moon!  
 0.9.0 &mdash;  LookAheadPlayer has `performAction()` implemented (but not `playoutGame()`)  
 0.9.1 &mdash;  Fixed shallow copy issues with Decks and hands  
 0.9.2 &mdash;  Playthroughs with state and lookahead player both work! Fixed minor issues  
 1.0.0 &mdash;  Full working game, with working State class, game playthroughs, and LookAhead AI  
 1.0.1 &mdash;  Finished skeleton of MCTS Player  
 1.0.2 &mdash;  Fixed bug with `advance()` method in the State class with returning accrued points  
+1.0.3 &mdash;  Most MCTS functions have been written; just need to deal with random playouts  
+1.0.4 &mdash;  Debugging process for MCTS &mdash; fixed an issue with `treePolicy()`  
+1.0.5 &mdash;  All MCTS functions except `assignReward()` now are fully functional  
+1.0.6 &mdash;  Preliminary completion of `assignReward()` function  
+1.0.7 &mdash;  MCTS completed and running &mdash; checking for validity of results now  
+1.1.0 &mdash;  MCTS player completed (but not optimized) for now
 
 ### Future Work
 
-1. Add working MCTS AI  
-2. Decouple Hand and Player operations by creating a new Hand class  
-3. Fix how cards are removed from the hand/selected by Players  
+1. Decouple Hand and Player operations by creating a new Hand class  
+2. Fix how cards are removed from the hand/selected by Players  

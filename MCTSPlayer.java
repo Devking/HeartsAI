@@ -58,7 +58,7 @@ class MCTSPlayer extends Player {
 		root = new Node(origState, playoutHand, null);
 		for (int i = 0; i < noIterations; i++) {
 			Node expanded = treePolicy(root);
-			double valueChange = assignReward(expanded);
+			int valueChange = assignReward(expanded);
 			backProp(expanded, valueChange);
 		}
 		return bestRewardChild(root);
@@ -74,12 +74,14 @@ class MCTSPlayer extends Player {
 			// Get the correct range of cards that we can possibly test for
 			int firstIndex = range.startIndex;
 			int lastIndex = range.endIndex;
+			System.out.println("Range: " + firstIndex + "-" + lastIndex);
 			// if firstSuit == null, then this is the first move
 			if (firstSuit == null) {
 				// If hearts has broken or only hearts remain, we can play any move
 				if (thisNode.thisState.hasHeartsBroken || hasAllHearts(thisNode.currentHand)) {
 					firstIndex = 0;
 					lastIndex = thisNode.currentHand.size();
+					System.out.println("Hearts Broken First Range: " + firstIndex + "-" + lastIndex);
 				} else {
 					// Hearts has not broken, and we have at least one non-hearts card we must play
 					SuitRange heartsRange = getSuitRange(Suit.HEARTS, thisNode.currentHand);
@@ -87,15 +89,19 @@ class MCTSPlayer extends Player {
 					if (heartsRange.startIndex == -1) {
 						firstIndex = 0;
 						lastIndex = thisNode.currentHand.size();
+						System.out.println("Hearts Only Forced Range: " + firstIndex + "-" + lastIndex);
 					} else {
 						// Otherwise, we need to eliminate the hearts range
+						firstIndex = 0;
 						lastIndex = heartsRange.startIndex;
+						System.out.println("First Play Range: " + firstIndex + "-" + lastIndex);
 					}
 				}
 			} else if (firstIndex == -1) {
 				// If firstIndex is -1 and firstSuit != null, then we don't have that suit in our hand
 				firstIndex = 0;
 				lastIndex = thisNode.currentHand.size();
+				System.out.println("Any Card Range: " + firstIndex + "-" + lastIndex);
 			}
 			// Visit all valid cards at least once first
 			for (int i = firstIndex; i < lastIndex; i++) {
@@ -124,17 +130,71 @@ class MCTSPlayer extends Player {
 
 	// Uses UCT function to see which is the best child to visit next during tree expansion
 	Node bestChild (Node someNode, double weight) {
-		return someNode;
+		int bestindex = 0; // Note this may be an issue if the child doesn't exist
+		double bestValue = -Double.MAX_VALUE;
+		int totalVisits = someNode.visitCount;
+		for (int i = 0; i < someNode.children.length; i++) {
+			if (someNode.children[i] != null) {
+				Node child = someNode.children[i];
+				int reward = child.bestReward;
+				int childVisits = child.visitCount;
+				// Use the UCT equation
+				double thisValue = (reward)/(childVisits) + weight * Math.sqrt((2*Math.log(totalVisits))/childVisits);
+				if (thisValue > bestValue) {
+					bestValue = thisValue;
+					bestindex = i;
+				}
+			}
+		}
+		return someNode.children[bestindex];
 	}
 
 	// At this point, the tree expansion will have occured -- now we will do random playouts of the game
-	double assignReward(Node baseNode) {
-		return 0;
+	// We want to give points for being good -- so add 26 - #points received (should we weight shooting the moon extra?)
+	int assignReward(Node baseNode) {
+		State finalState = new State (baseNode.thisState);
+		ArrayList<Card> finalHand = new ArrayList<Card>(baseNode.currentHand);
+		// Do random playouts until the game has ended
+		while (finalState.isGameValid()) {
+			Suit firstSuit = getFirstSuit(finalState.currentRound);
+			SuitRange range = getSuitRange(firstSuit, finalHand);
+			int firstIndex = range.startIndex;
+			int lastIndex = range.endIndex;
+			if (firstSuit == null) {
+				int debug = -1;
+				while (debug == -1) { 
+					int index = rng.nextInt(finalHand.size());
+					Card playCard = finalHand.remove(index);
+					debug = finalState.advance(playCard, finalHand);
+					// If there was an error, put the card back in the hand and fix the hand
+					if (debug == -1) {
+						finalHand.add(playCard);
+						Collections.sort(finalHand); 
+					} 
+				}
+			} else {
+				if (range.getRange() == 0) {
+					finalState.advance(finalHand.remove(rng.nextInt(finalHand.size())), finalHand);
+				} else {
+					int index = rng.nextInt(range.getRange());
+					finalState.advance(finalHand.remove(range.startIndex+index), finalHand);
+				}
+			}
+		}
+		// At this point, the game has ended, and we can check the score!
+		int points = finalState.getScore();
+		int score = 26 - points;
+		return score;
 	}
 
 	// At this point, tree expansion and random playouts have both occured -- propagate the rewards back up
 	void backProp (Node baseNode, double value) {
-
+		Node no = baseNode;
+		while (no != null) {
+			no.visitCount++;
+			no.bestReward += value;
+			no = no.parent;
+		}
 	}
 
 	// Pick the child of the root with the highest reward
@@ -167,6 +227,9 @@ class MCTSPlayer extends Player {
 		for (Card c : hand) playoutHand.add(c.copy());
 		// For human debugging: print the hand
 		printHand();
+		// If very last move, you must play that card
+		if (hand.size() == 1)
+			return hand.remove(0);
 		// Actually play the card, after doing MCTS
 		return hand.remove(runMCTS(masterCopy));
 	}
