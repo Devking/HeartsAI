@@ -48,6 +48,8 @@
 0.7.1 &mdash;  `advance()` now checks for validity of the selected move  
 0.7.2 &mdash;  Design paradigm for multiple game playouts has been established  
 0.8.0 &mdash;  Finished preliminary version of `advance()` in the State class  
+0.8.1 &mdash;  Added functionality for displaying debug messages only for Human players  
+0.8.2 &mdash;  Fixed printout issue with shooting the moon -- random AI able to shoot the moon!  
 
 ### Things To Do
 
