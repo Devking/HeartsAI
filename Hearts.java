@@ -1,6 +1,6 @@
 public class Hearts {
 	public static void main(String[] args) {
-		System.out.println("Welcome to Hearts version 0.7.2.");
+		System.out.println("Welcome to Hearts version 0.8.0.");
 		System.out.println("(First fully playable version will be 1.0.0.)\n");
 
 		// Initalize the deck of cards

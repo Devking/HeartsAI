@@ -47,6 +47,7 @@
 0.7.0 &mdash;  Implementation for `advance()` within the State class has begun  
 0.7.1 &mdash;  `advance()` now checks for validity of the selected move  
 0.7.2 &mdash;  Design paradigm for multiple game playouts has been established  
+0.8.0 &mdash;  Finished preliminary version of `advance()` in the State class  
 
 ### Things To Do
 
