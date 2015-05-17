@@ -22,6 +22,7 @@ public class Deck {
 	Deck (Deck toCopy) {
 		this.initCounter = toCopy.initCounter;
 		this.allCards = new ArrayList<Card>(toCopy.allCards);
+		this.invertDeck = new ArrayList<Card>(toCopy.invertDeck);
 	}
 
 	// generate deck for the first time; can only be used once; should never be called outside constructor
@@ -70,6 +71,9 @@ public class Deck {
 	void restockDeck(Card returned) { allCards.add(returned); invertDeck.remove(returned); }
 
 	// check that we have all 52 unique cards
-	// checkDeck() {}
+	boolean checkDeck() {
+		if (allCards.size() == 52 && invertDeck.size() == 0) return true;
+		return false;
+	}
 
 }

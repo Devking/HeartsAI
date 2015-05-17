@@ -248,7 +248,7 @@ class Game {
 				// Create a copy of the current game state, to be passed in to the Player
 				// So that the Player may potentially do playouts of the game
 				// Note that these three parameters are copied in the State constructor
-				State gameCopy = new State(cardsPlayed, currentRound, playerScores);
+				State gameCopy = new State(cardsPlayed, currentRound, playerScores, hasHeartsBroken, index);
 
 				// Loop: Allow player to pick a play, but reject if invalid selection
 				while (!validPlay) {

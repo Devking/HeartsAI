@@ -11,7 +11,7 @@ class HumanPlayer extends Player {
 		System.out.println("Human player ("+name+") initialized."); 
 	}
 
-	Card performAction (State gameCopy) {
+	Card performAction (State masterCopy) {
 
 		boolean flag = true;
 		int i = 0;

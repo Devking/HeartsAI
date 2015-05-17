@@ -44,6 +44,9 @@
 0.6.3 &mdash;  **RandomPlayAI** has been implemented completely and is working  
 0.6.4 &mdash;  **MCTSPlayer** implementation has begun  
 0.6.5 &mdash;  **LookAheadPlayer** implementation has begun  
+0.7.0 &mdash;  Implementation for `advance()` within the State class has begun  
+0.7.1 &mdash;  `advance()` now checks for validity of the selected move  
+0.7.2 &mdash;  Design paradigm for multiple game playouts has been established  
 
 ### Things To Do
 
